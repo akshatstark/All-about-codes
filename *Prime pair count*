@@ -1,0 +1,37 @@
+import java.util.*;
+
+public class PrimePairsCount {
+    public static void main(String[] args) {
+        int startRange = 1;  // Starting range
+        int endRange = 100; // Ending range
+
+        int count = countPrimePairs(startRange, endRange);
+        System.out.println("Number of pairs with a difference of 6: " + count);
+    }
+
+    // Function to check if a number is prime
+    public static boolean isPrime(int num) {
+        if (num <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Function to count pairs of prime numbers with a difference of 6
+    public static int countPrimePairs(int startRange, int endRange) {
+        int count = 0;
+
+        for (int i = startRange; i <= endRange - 6; i++) {
+            if (isPrime(i) && isPrime(i + 6)) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+}
