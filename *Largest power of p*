@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+
+        System.out.print("Enter a prime number: ");
+        int prime = scanner.nextInt();
+
+        int power = 0;
+        int divisor = prime;
+
+        while (number / divisor > 0) {
+            power += number / divisor;
+            divisor *= prime;
+        }
+
+        System.out.println("The largest power of " + prime + " that divides " + number + "! is: " + power);
+
+        scanner.close();
+    }
+}
