@@ -1,0 +1,30 @@
+public class Main{
+    public static int countConsecutiveNumbers(int target) {
+        int count = 0;
+        int left = 1;
+        int right = 1;
+        int sum = 1;
+
+        while (left <= target / 2) {
+            if (sum < target) {
+                right++;
+                sum += right;
+            } else if (sum > target) {
+                sum -= left;
+                left++;
+            } else {
+                count++;
+                sum -= left;
+                left++;
+            }
+        }
+
+        return count;
+    }
+
+    public static void main(String[] args) {
+        int target = 12;
+        int consecutiveCount = countConsecutiveNumbers(target);
+        System.out.println("Number of consecutive sums: " + consecutiveCount);
+    }
+}
