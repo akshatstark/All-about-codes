@@ -1,0 +1,44 @@
+import java.util.*;
+public class Main {
+    public static int getNthUglyNumber(int n) {
+        int[] uglyNumbers = new int[n];
+        uglyNumbers[0] = 1;
+
+        int factor2 = 2; 
+        int factor3 = 3; 
+        int factor5 = 5; 
+
+        int index2 = 0;
+        int index3 = 0;
+        int index5 = 0;
+
+        for (int i = 1; i < n; i++) {
+            int nextUglyNumber = Math.min(factor2, Math.min(factor3, factor5));
+            uglyNumbers[i] = nextUglyNumber;
+
+            if (nextUglyNumber == factor2) {
+                index2++;
+                factor2 = uglyNumbers[index2] * 2;
+            }
+
+            if (nextUglyNumber == factor3) {
+                index3++;
+                factor3 = uglyNumbers[index3] * 3;
+            }
+
+            if (nextUglyNumber == factor5) {
+                index5++;
+                factor5 = uglyNumbers[index5] * 5;
+            }
+        }
+
+        return uglyNumbers[n - 1];
+    }
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n = sc.nextInt();
+        int nthUglyNumber = getNthUglyNumber(n);
+        System.out.println("The " + n + "th ugly number is: " + nthUglyNumber);
+    }
+}
