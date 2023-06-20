@@ -1,0 +1,37 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        String str = "abc"; 
+
+        List<String> permutations = generatePermutations(str);
+        System.out.println("Permutations of " + str + ":");
+        for (String permutation : permutations) {
+            System.out.println(permutation);
+        }
+    }
+
+    public static List<String> generatePermutations(String str) {
+        List<String> permutations = new ArrayList<>();
+        generatePermutationsHelper(str.toCharArray(), 0, permutations);
+        return permutations;
+    }
+
+    private static void generatePermutationsHelper(char[] chars, int index, List<String> permutations) {
+        if (index == chars.length - 1) {
+            permutations.add(String.valueOf(chars));
+        } else {
+            for (int i = index; i < chars.length; i++) {
+                swap(chars, index, i);
+                generatePermutationsHelper(chars, index + 1, permutations);
+                swap(chars, index, i); 
+            }
+        }
+    }
+
+    private static void swap(char[] chars, int i, int j) {
+        char temp = chars[i];
+        chars[i] = chars[j];
+        chars[j] = temp;
+    }
+}
