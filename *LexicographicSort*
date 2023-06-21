@@ -1,0 +1,15 @@
+import java.util.Arrays;
+
+public class LexicographicSort {
+    public static void main(String[] args) {
+        String input = "Hello World!";
+        String sortedString = sortLexicographically(input);
+        System.out.println("Sorted string: " + sortedString);
+    }
+
+    private static String sortLexicographically(String input) {
+        char[] charArray = input.toCharArray();
+        Arrays.sort(charArray);
+        return new String(charArray);
+    }
+}
