@@ -1,0 +1,49 @@
+import java.util.*;
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+
+public class PalindromeLinkedList {
+    public static boolean isPalindrome(ListNode head) {
+        // Step 1: Store values in an array
+        List<Integer> values = new ArrayList<>();
+        ListNode current = head;
+        while (current != null) {
+            values.add(current.val);
+            current = current.next;
+        }
+
+        // Step 2: Initialize pointers
+        int left = 0;
+        int right = values.size() - 1;
+
+        // Step 3 and 4: Compare elements from both ends
+        while (left < right) {
+            if (!values.get(left).equals(values.get(right))) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+
+        // Step 5: Palindrome check succeeded
+        return true;
+    }
+
+    public static void main(String[] args) {
+        // Create a sample linked list: 1 -> 2 -> 3 -> 2 -> 1
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(2);
+        head.next.next.next.next = new ListNode(1);
+
+        boolean isPalindrome = isPalindrome(head);
+        System.out.println("Is the linked list a palindrome? " + isPalindrome);
+    }
+}
