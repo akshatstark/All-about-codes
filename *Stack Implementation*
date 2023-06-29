@@ -1,0 +1,20 @@
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		Stack<Integer> st=new Stack<Integer>();
+		st.push(4);
+		st.push(5);
+		st.push(6);
+		System.out.println(st);
+		
+		System.out.println(st.peek());
+		
+		st.pop();
+		System.out.println(st);
+		
+		System.out.println("is list empty? "+ st.empty());
+		
+		System.out.println("is the given element present at which position?"+ st.search(5));
+	}
+}
