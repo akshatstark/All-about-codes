@@ -1,0 +1,19 @@
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner sc=new Scanner(System.in);
+	    int n=sc.nextInt();
+	    int m=n*n;
+	    int x=n;
+	    int c=0;
+	    while(n>0){
+	        int rem=n%10;
+	        c++;
+	        n=n/10;
+	    }
+	    int res=((int)(m%(Math.pow(10,c))));
+	    if(x==res) System.out.print("Automorphic");
+	    else  System.out.print("Not Automorphic");
+	}
+}
