@@ -1,0 +1,42 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+    public static void main(String[] args)  {
+        
+        Scanner sc=new Scanner(System.in);
+        StringBuilder output = new StringBuilder("");
+        int q=sc.nextInt();
+        queries:
+        for(int j=0;j<q;j++){
+            int n=sc.nextInt();
+            int[] A=new int[n];
+            int[] B=new int[n];
+            int k=sc.nextInt();
+            for(int i=0;i<n;i++){
+                A[i]=sc.nextInt();
+            }
+            for(int i=0;i<n;i++){
+                B[i]=sc.nextInt();
+            }
+            Arrays.sort(A);
+            Arrays.sort(B);
+            for(int i=0;i<n;i++){
+                if(A[i]+B[n-i-1]<k){
+                    output.append="No\n";
+                    continue queries;
+                }
+            }
+            output.append="Yes\n";
+            
+            
+        }
+        System.out.println(output);
+       
+    }
+}
