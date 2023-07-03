@@ -1,0 +1,20 @@
+public class Main
+{
+	public static void main(String[] args) {
+	    int n=132;
+	    int s=0; int p=1;
+	    while(n>0){
+	        int rem=n%10;
+	        s=s+rem;
+	        p=p*rem;
+	        n=n/10;
+	        
+	    }
+	    if(s==p){
+		System.out.println("Spy");
+	    }
+	    else{
+	        System.out.println("No Spy");
+	    }
+	}
+}
