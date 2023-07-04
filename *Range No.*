@@ -1,0 +1,30 @@
+public class Main{
+    public static void main(String[] args) {
+        int start = 100; 
+        int end = 200; 
+
+        for (int i = start; i <= end; i++) {
+            if (containsOnlyDigits(i, new int[]{1, 4, 9})) {
+                System.out.println(i);
+            }
+        }
+    }
+
+    private static boolean containsOnlyDigits(int number, int[] digits) {
+        String numberString = String.valueOf(number);
+        for (char c : numberString.toCharArray()) {
+            int digit = Character.getNumericValue(c);
+            boolean validDigit = false;
+            for (int d : digits) {
+                if (digit == d) {
+                    validDigit = true;
+                   
+                }
+            }
+            if (!validDigit) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
