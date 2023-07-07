@@ -1,0 +1,30 @@
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		List<Integer> list=new LinkedList<Integer>();
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		list.add(3);
+		list.add(2);
+		list.add(1);
+		System.out.print(list);
+		int flag=0;
+		    for(int i=0;i<list.size()/2;i++){
+		        if(list.get(i)==list.get(list.size()-i-1)){
+		            flag=1;
+		        }
+		        else{
+		            flag=0;
+		        }
+		    }
+System.out.println();
+if(flag==1){
+    System.out.print("Yes");
+}
+else{
+     System.out.print("No");
+}
+	}
+}
