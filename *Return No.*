@@ -1,0 +1,21 @@
+public class Main {
+	public static void main(String args[]) {
+		int arr[]={1,2,3,3};
+		int n=0;
+		int k=0;
+		 for(int i=0;i<arr.length-1;i++){
+            if(arr[i]==arr[i+1]){
+            n++;
+            k=arr[i];
+      }
+   }
+   n++;
+   if(arr.length==2*n && k==arr.length-n+1){
+    System.out.println(k); 
+   }
+   else{
+       System.out.print("Not matched");
+   }
+// 	System.out.println(n);  
+	}
+}
