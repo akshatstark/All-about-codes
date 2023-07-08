@@ -1,28 +1,39 @@
 import java.util.*;
-public class Main {
-	public static void main(String args[]) {
-		int r, n, num;
-        boolean flag=false;
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter number=");
-        n = sc.nextInt();
-        num = n;
-        while (num > 0)
-        {
-            r = num % 10;
-            if(r==0)
-            {
-                flag=true;
+public class Main
+{
+    public static boolean checkTheNumber(String number){
+        int stringLength = number.length();
+        int zero=0;
+        char character;
+        for(int i= 0; i < stringLength; i++){
+            character = number.charAt(i);
+            if(character == '0'){
+                zero++;
             }
-            num = num / 10;
         }
-        if(flag)
-        {
-            System.out.println("Duck Number");
+        char firstDigit = number.charAt(0);
+        if(firstDigit!= '0' && zero>0){
+            return true;
         }
-        else
-        {
-            System.out.println("Not Duck Number");
+        else{
+            return false;
         }
-}
+    }
+    
+    
+    public static void main(String[] args) {
+        
+        Scanner sc= new Scanner(System.in);
+        System.out.println("Enter a number");
+        String number= sc.nextLine();
+        boolean result= checkTheNumber(number);
+        if(result== true){
+             System.out.println("Number is a duck number: "+ number);
+        }
+        else{
+             System.out.println("Number is not a duck number: "+ number);
+
+
+        }
+    }
 }
