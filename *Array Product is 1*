@@ -25,7 +25,7 @@ public class Main
 		    c=c+2;
 		}
 		
-		System.out.print(c);
+		System.out.println(c);
 		
 		
 	}
