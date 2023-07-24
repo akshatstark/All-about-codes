@@ -1,0 +1,43 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int k=sc.nextInt();
+        System.out.println(concatenateIntKTimes(n,k)); 
+        
+    }
+    public static int concatenateIntKTimes(int number, int k) {
+        if (k <= 0) {
+            return 0;
+        }
+
+        StringBuilder result = new StringBuilder();
+        String numStr = String.valueOf(number);
+
+        for (int i = 0; i < k; i++) {
+            result.append(numStr);
+        }
+        String str=result.toString();
+        int i=Integer.parseInt(str);  
+        return sup(i);
+    }
+    public static int sup(int x){
+        int rem=0;
+        int c=0;
+        if(x/10==0) return x;
+        while(x>0){
+            rem=x%10;
+            x=x/10;
+            c=c+rem;
+        }
+        return sup(c);
+    }
+}
