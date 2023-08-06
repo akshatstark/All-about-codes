@@ -1,0 +1,52 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+public static void main(String[] args) throws IOException {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+    Stack stack1 = new Stack<>();
+    Stack stack2 = new Stack<>();
+
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int n = Integer.parseInt(br.readLine().trim());
+
+    List<String> queries = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+        queries.add(br.readLine().trim());
+    }
+
+    for (String query : queries){
+        if (query.equals("2")){
+            int queueLength = stack1.size();
+            for (int i = 0; i<queueLength; i++){
+                Object lastElement = stack1.get(stack1.size() - 1);
+                stack1.remove(lastElement);
+                stack2.add(lastElement);
+            }
+            stack2.remove(0);
+        }
+
+        else if (query.equals("3")){
+            System.out.println(stack2.get(0));
+        }
+
+        else if (query.charAt(0) == '1'){
+            String[] queryArray = query.split(" ");
+            int value = Integer.parseInt(queryArray[1]);
+
+            int queueLength = stack1.size();
+            for (int i = 0; i<queueLength; i++){
+                Object lastElement = stack1.get(stack1.size() - 1);
+                stack1.remove(lastElement);
+                stack2.add(lastElement);
+            }
+            stack2.add(value);     
+        }
+
+    }
+
+
+
+}
+}
