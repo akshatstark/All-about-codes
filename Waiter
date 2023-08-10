@@ -1,0 +1,107 @@
+//copied!!!
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+    public static List<Integer> waiter(List<Integer> number, int q) {
+    // Write your code here
+    Stack<Integer> numberStack = new Stack<>();
+    for(int no : number) {
+        numberStack.push(no);
+    }
+
+    List<Integer> primeNos = getPrimes(number);
+
+    List<Integer> answers = new ArrayList<>();
+    int curr = 0;
+    while(q != 0) {
+        Stack<Integer> a = new Stack<>();
+        Stack<Integer> b = new Stack<>();
+        while(!numberStack.isEmpty()) {
+            int top = numberStack.pop();
+            if(top % primeNos.get(curr) == 0) {
+                b.push(top);
+            } else {
+                a.push(top);
+            }
+        }
+        curr++;
+        numberStack = a;
+
+        while(!b.isEmpty()) {
+            answers.add(b.pop());
+        }
+
+        q--;
+
+        if(q == 0) {
+            while(!a.isEmpty()) {
+                answers.add(a.pop());
+            }
+        }
+    }
+
+    return answers;
+    }
+
+
+public static List<Integer> getPrimes(List<Integer> number){
+    List<Integer> primeNos = new ArrayList<>();
+    int no = 2;
+    while(primeNos.size() != number.size()) {
+        boolean flag = false;
+        for(int i=2; i<=Math.sqrt(no); i++) {
+            if(no%i == 0) {
+                flag = !flag;
+                break;
+            }  
+        }
+        if(!flag) {
+            primeNos.add(no);
+        }
+        no++;
+    }
+    return primeNos;
+}
+}
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String[] firstMultipleInput = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        int n = Integer.parseInt(firstMultipleInput[0]);
+
+        int q = Integer.parseInt(firstMultipleInput[1]);
+
+        String[] numberTemp = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        List<Integer> number = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            int numberItem = Integer.parseInt(numberTemp[i]);
+            number.add(numberItem);
+        }
+
+        List<Integer> result = Result.waiter(number, q);
+
+        for (int i = 0; i < result.size(); i++) {
+            bufferedWriter.write(String.valueOf(result.get(i)));
+
+            if (i != result.size() - 1) {
+                bufferedWriter.write("\n");
+            }
+        }
+
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
