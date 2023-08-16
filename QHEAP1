@@ -1,0 +1,28 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        int q=sc.nextInt();
+        TreeSet set=new TreeSet<>();
+        for(int i=0;i<q;i++){
+            int x=sc.nextInt();
+              if(x == 1) {
+            int ele = sc.nextInt();
+            set.add(ele);
+        }
+
+        if(x == 2) {
+            int ele = sc.nextInt();
+            set.remove(ele);
+        }
+
+        if(x == 3) {
+            System.out.println(set.first());
+        }
+        }
+    }
+}
