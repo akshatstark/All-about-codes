@@ -1,0 +1,35 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int k=sc.nextInt();
+        int c=0;
+        PriorityQueue<Integer> qe=new PriorityQueue<Integer>(n);
+        for(int i=0;i<n;i++){
+            qe.add(sc.nextInt());
+        }
+        while(qe.peek()<k && qe.size()>1){
+            int ele=qe.poll() + 2*qe.poll();
+            qe.add(ele);
+            c++;
+        }
+         if(qe.peek() >= k){
+            System.out.println(c);
+        } else{
+            System.out.println(-1);
+        }
+    }
+}
