@@ -13,13 +13,6 @@ import static java.util.stream.Collectors.toList;
 
 class Result {
 
-    /*
-     * Complete the 'isValid' function below.
-     *
-     * The function is expected to return a STRING.
-     * The function accepts STRING s as parameter.
-     */
-
     
     // Write your code here
  public static String isValid(String s) {
