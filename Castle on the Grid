@@ -1,0 +1,92 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+
+    /*
+     * Complete the 'minimumMoves' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts following parameters:
+     *  1. STRING_ARRAY grid
+     *  2. INTEGER startX
+     *  3. INTEGER startY
+     *  4. INTEGER goalX
+     *  5. INTEGER goalY
+     */
+
+    public static int minimumMoves(List<String> grid, int startX, int startY, int goalX, int goalY) {
+    // Write your code here
+int[][] DIRS = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
+    int N = grid.size();
+    boolean[][] visited = new boolean[N][N];
+    Queue<int[]> queue = new LinkedList();
+    queue.offer(new int[]{startX,startY});
+    int moves = 0;
+    while (!queue.isEmpty()){
+        int size = queue.size();
+        moves++;
+        for (int i=0; i<size; i++){
+            int[] pair = queue.poll();
+            int x = pair[0], y = pair[1];
+            for (int[] dir: DIRS){
+                int nextX = x;
+                int nextY = y;
+                while (true){
+                    nextX += dir[0];
+                    nextY += dir[1];
+                    if (nextX <  0 || nextX >= N || nextY >=N || nextY < 0 || grid.get(nextX).charAt(nextY) == 'X') break;
+                    if (nextX == goalX && nextY == goalY){
+                        return moves;
+                    } else if (! visited[nextX][nextY]){
+                        visited[nextX][nextY] = true;
+                        queue.offer(new int[]{nextX, nextY});
+                    }
+                }
+            }
+        }
+    }     
+    return -1;
+    }
+
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = Integer.parseInt(bufferedReader.readLine().trim());
+
+        List<String> grid = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            String gridItem = bufferedReader.readLine();
+            grid.add(gridItem);
+        }
+
+        String[] firstMultipleInput = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+
+        int startX = Integer.parseInt(firstMultipleInput[0]);
+
+        int startY = Integer.parseInt(firstMultipleInput[1]);
+
+        int goalX = Integer.parseInt(firstMultipleInput[2]);
+
+        int goalY = Integer.parseInt(firstMultipleInput[3]);
+
+        int result = Result.minimumMoves(grid, startX, startY, goalX, goalY);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
