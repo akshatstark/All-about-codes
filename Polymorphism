@@ -1,0 +1,48 @@
+// Complile time polymrph 
+/*
+class Test
+{
+    public static void Name(String n){
+        System.out.print(n);
+    }
+    public static void Name(int n){
+        System.out.print(n);
+    }
+}
+public class Main{
+	public static void main(String[] args) {
+		Test.Name("hi");
+		Test.Name(5);
+	}
+}
+*/
+
+//Runtime polymrph
+
+class Test {
+    public void area() {
+        System.out.println("Area");
+    }
+}
+
+class Square extends Test {
+    public void area() {
+        System.out.println("Area of Square");
+    }
+}
+
+class Rect extends Test {
+    public void area() {
+        System.out.println("Area of Rectangle");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Test t;
+        t = new Square();
+        t.area();
+        t = new Rect();
+        t.area();
+    }
+}
