@@ -1,0 +1,118 @@
+//Inheritance
+
+//Single-Level
+/*
+class A{
+    public void Car(){
+        System.out.println("Ferrari");
+    }
+}
+class B extends A{
+    public void Model(){
+        System.out.println("Top Model");
+    }
+}
+class Main{
+    public static void main(String[] args){
+        B b;
+        b=new B();
+        b.Car();
+        b.Model();
+    }
+}
+*/
+
+// Multi-level
+/*
+class A{
+    public void Car(){
+        System.out.println("Ferrari");
+    }
+}
+class B extends A{
+    public void Model(){
+        System.out.println("Top Model");
+    }
+}
+class C extends B{
+    public void Price(){
+        System.out.println("1 million");
+    }
+}
+class Main{
+    public static void main(String[] args){
+        C c;
+        c= new C();
+        c.Car();
+        c.Model();
+        c.Price();
+    }
+}
+*/
+// Hiearchal 
+/*
+class A{
+    public void Car(){
+        System.out.println("Ferrari");
+    }
+}
+class B extends A{
+    public void Model(){
+        System.out.println("Top Model");
+    }
+}
+class C extends A{
+    public void Average(){
+        System.out.println("12 miles/L");
+    }
+}
+class Main{
+    public static void main(String[] args){
+        C c;
+        c=new C();
+        c.Car();
+        c.Average();
+      //  c.Model(); error
+    }
+}
+*/
+//Multiple using interface
+interface A{
+    default void Car(){
+        System.out.println("Ferrari");
+    }
+}
+interface B{
+    default void Car(){
+        System.out.println("Lambo");
+    }
+}
+public class Main implements A, B{
+    public void Car() {
+         A.super.Car(); // Calls the Car() method from interface A
+         B.super.Car(); // Calls the Car() method from interface B
+    }
+    public static void main(String[] args){
+       Main main = new Main();
+       main.Car();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
