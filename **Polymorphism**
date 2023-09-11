@@ -15,6 +15,25 @@ public class Main{
 		Test.Name(5);
 	}
 }
+class Area{
+    
+    public  void area(int s){
+        System.out.println(s*s);
+    }
+    public void area(int l,int b){
+        System.out.println(l*b);
+    }
+}
+public class Main{
+	public static void main(String[] args) {
+	    Area a;
+	    a=new Area();
+	    a.area(4);
+	    a.area(3,4);
+	    
+	}
+}
+
 */
 
 //Runtime polymrph
@@ -45,4 +64,34 @@ public class Main {
         t = new Rect();
         t.area();
     }
+} 
+
+class Area{
+     public void area() {
+        System.out.println("Area");
+    }
 }
+class S extends Area{
+    public void area(int s){
+        System.out.println(s*s);
+    }
+}
+class R extends Area{
+    public void area(int l,int b){
+        System.out.println(l*b);
+}}
+    
+public class Main
+{
+	public static void main(String[] args) {
+	    Area a;
+	   // a=new Area();
+	   // a.area();
+	    a=new S();
+	    ((S) a).area(4);
+	    a=new R();
+	    ((R) a).area(3,4);
+	    
+	}
+}
+
