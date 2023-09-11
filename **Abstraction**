@@ -1,3 +1,4 @@
+// Abstraction using abstract class
 abstract class Animal{
     private String name;
     
@@ -37,5 +38,28 @@ public class Main{
         a.sound();
         a=new Cat("Tom");
         a.sound();
+    }
+}
+// Abstraction using interface
+interface Study{
+    void time();
+    void subjects();
+}
+abstract class Student implements Study{
+    public void subjects(){
+        System.out.println("Focus on all subjects");
+    }
+}
+class Time extends Student{
+    public void time(){
+        System.out.println("Make proper time table");
+    }
+}
+public class Main{
+    public static void main(String[] args){
+        Time t;
+        t=new Time();
+        t.subjects();
+        t.time();
     }
 }
