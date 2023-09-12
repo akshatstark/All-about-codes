@@ -40,6 +40,40 @@ public class Main{
         a.sound();
     }
 }
+
+// another example
+abstract class Car{
+    private String name;
+    
+    public Car(String name){
+        this.name=name;
+    }
+    
+    abstract void acc();
+    abstract void brake();
+    public String name(){
+        return name;
+    }
+}
+class Acc extends Car{
+    public Acc(String name){
+        super(name);
+    }
+    void acc(){
+        System.out.println(name()+" is moving now...");
+    }
+     void brake(){
+         System.out.println(" is stopped now...");
+     }
+}
+class Main{
+    public static void main(String[] args){
+        Car c;
+        c=new Acc("Sedan");
+        c.acc();
+    }
+}
+
 // Abstraction using interface
 interface Study{
     void time();
