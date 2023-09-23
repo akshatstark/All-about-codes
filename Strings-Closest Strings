@@ -1,0 +1,21 @@
+
+class Solution {
+    int shortestDistance(ArrayList<String> s, String word1, String word2) {
+        // code here
+        // System.out.print(s.get(3));
+        int w1=Integer.MAX_VALUE;
+        int w2=Integer.MAX_VALUE;
+        int res=Integer.MAX_VALUE;
+        for(int i=0;i<s.size();i++){
+            if(s.get(i).equals(word1)){
+                w1=i;
+                res=Math.min(res,Math.abs(w1-w2));
+            }
+            if(s.get(i).equals(word2)){
+                w2=i;
+                res=Math.min(res,Math.abs(w1-w2));
+            }
+        }
+        return res;
+    }
+}
