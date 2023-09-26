@@ -1,0 +1,26 @@
+class Solution {
+    boolean areKAnagrams(String s1, String s2, int k) {
+        // code here
+        if(s1.length()!=s2.length()){
+            return false;
+        }
+        int arr[]=new int[26];
+        for(int i=0;i<26;i++){
+            arr[i]=0;
+        }
+        for(int i=0;i<s1.length();i++){
+            int c=s1.charAt(i)-'a';
+            arr[c]++;
+        }
+        for(int i=0;i<s2.length();i++){
+             int c=s2.charAt(i)-'a';
+             if(arr[c]>0) arr[c]--;
+        }
+        int sum=0;
+        for(int i=0;i<26;i++){
+            sum+=arr[i];
+        }
+        if(sum<=k) return true;
+        else  return false;
+    }
+}
