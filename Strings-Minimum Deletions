@@ -1,0 +1,20 @@
+class Solution{
+    static int minimumNumberOfDeletions(String s, int i, int j, int[][] dp) {
+        if(i >= j)
+            return dp[i][j] = 0;
+        if(dp[i][j] != -1)
+            return dp[i][j];
+        
+        if(s.charAt(i) == s.charAt(j))
+            return dp[i][j] = minimumNumberOfDeletions(s, i + 1, j - 1, dp);
+        else
+            return dp[i][j] = Math.min(minimumNumberOfDeletions(s, i + 1, j, dp), minimumNumberOfDeletions(s, i, j - 1, dp)) + 1;
+    }
+    static int minimumNumberOfDeletions(String S) {
+        int n = S.length();
+        int[][] dp = new int[n + 1][n + 1];
+        for(int[] d : dp)
+            Arrays.fill(d, -1);
+        return minimumNumberOfDeletions(S, 0, n - 1, dp);
+    }
+}
