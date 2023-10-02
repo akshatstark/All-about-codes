@@ -1,0 +1,12 @@
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        String s1 = "fsbcnuvqhffbsaqxwp";
+        String s2="wpfsbcnuvqhffbsaqx";
+        String s3=s1+s1;
+        if(s3.indexOf(s2)!=-1)
+        System.out.print("Rotation found");
+        else
+        System.out.print("No Rotation found");
+    }
+}
