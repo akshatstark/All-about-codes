@@ -1,0 +1,64 @@
+/* node class of the linked list
+class Node
+{
+    int data;
+    Node next;
+    Node(int key)
+    {
+        data = key;
+        next = null;
+    }
+}
+*/
+
+
+class Solution {
+    // Function to pairwise swap elements of a linked list.
+    // It should returns head of the modified list
+    
+    public Node pairwiseSwap(Node head)
+    {
+        
+        Node dummy=new Node(0); // made a dummy node
+        dummy.next=head;
+        Node point=dummy; // using this as a refrence point for using pointers
+        
+        
+        
+        while(point.next!=null && point.next.next!=null){
+            
+            Node swap1=point.next;
+            Node swap2=point.next.next; // created 2 nodes which we will work upon
+            
+            swap1.next=swap2.next;
+            swap2.next=swap1;   // actual swapping happens here
+            
+            point.next=swap2;
+            point=swap1;  // modifying the nodes here
+        }
+        
+         return dummy.next;
+    }
+}
+
+
+//Another method using recursion
+
+class Solution {
+    // Function to pairwise swap elements of a linked list.
+    // It should returns head of the modified list
+    
+    public Node pairwiseSwap(Node head)
+    {
+        if(head==null || head.next==null)
+            return head;
+            
+        Node first = head;
+        Node second = head.next;
+        Node new_head = pairwiseSwap(head.next.next);
+        
+        second.next = first;
+        first.next = new_head;
+        return second;
+    }
+}
