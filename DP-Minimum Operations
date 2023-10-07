@@ -1,0 +1,20 @@
+class Solution
+{
+    public int minOperation(int n)
+    {
+        //code here.
+        int i=0;
+        return min(i,n);
+    }
+    static int min(int i,int n){
+        if(i==n){
+            return n+1;
+        }
+        if(i%2==0){
+            return 1+min(i,n/2);
+        }
+        else{
+            return 1+min(i,n-1);
+        }
+    }
+}
