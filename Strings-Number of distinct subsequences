@@ -6,11 +6,11 @@ class Solution {
         dp[0]=1;
         HashMap<Character,Integer> map=new HashMap<>();
         for(int i=1;i<dp.length;i++){
-            dp[i]=(2*dp[i-1])%m;
+            dp[i]=(2*dp[i-1])%m;  // as we traverse string the no. of combinations increases as 2^n
             
-            if(map.containsKey(S.charAt(i-1))){
+            if(map.containsKey(S.charAt(i-1))){   // checking if the char has occurred before
                 int j=map.get(S.charAt(i-1));
-                dp[i]=(dp[i]-dp[j-1]+m)%m;
+                dp[i]=(dp[i]-dp[j-1]+m)%m;  // subtracting common subsequences
             }
             
             map.put(S.charAt(i-1),i);
