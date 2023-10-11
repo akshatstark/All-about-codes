@@ -15,7 +15,7 @@ public class Main {
         int l2 = s2.length();
 
         int dp[][] = new int[l1 + 1][l2 + 1];
-        for (int i = 0; i <= l1; i++) {
+        for (int i = 0; i <= l1; i++) {        // fills the dp array with 0
             for (int j = 0; j <= l2; j++) {
                 dp[i][j] = 0;
             }
@@ -23,13 +23,13 @@ public class Main {
 
         for (int i = 1; i <= l1; i++) {
             for (int j = 1; j <= l2; j++) {
-                if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                if (s1.charAt(i - 1) == s2.charAt(j - 1)) {    // checks if the char is equal at particular index
                     dp[i][j] = dp[i - 1][j - 1] + 1;
-                } else {
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                } else {                                      // else it traverses every possible index with other indexes and updates the max value
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);  
                 }
             }
         }
-        return dp[l1][l2];
+        return dp[l1][l2];      //you will find your answer at this last indes of 2D matrix
     }
 }
