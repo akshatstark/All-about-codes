@@ -1,0 +1,17 @@
+public class Main
+{
+	public static void main(String[] args) {
+	    int n=3;
+	    int[] arr=new int[n+1];
+		System.out.println(dp(arr,n));
+	}
+	static int dp(int[] arr,int n){
+	    if(n==0 ) return 0;
+	     if(n==1 ) return 1;
+	    if(arr[n]!=0) return arr[n];
+	    
+	    arr[n]=dp(arr,n-1)+dp(arr,n-2);
+	    return arr[n];
+	    
+	}
+}
