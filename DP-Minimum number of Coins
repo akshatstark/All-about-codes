@@ -1,0 +1,17 @@
+class Solution{
+    static List<Integer> minPartition(int N)
+    {
+        // code here
+        int[] arr={2000,500,200,100,50,20,10,5,2,1};    // making an array of all notes available
+        List<Integer> list=new ArrayList<>();
+        for(int i=0;i<arr.length;i++){
+            while(N>=arr[i]){        //when the value is just above the note that note is taken as we have to return min amt. of notes
+                if(N>=arr[i]) {
+                    list.add(arr[i]);
+                    N=N-arr[i];
+                }
+            }
+        }
+        return list;
+    }
+}
