@@ -1,0 +1,20 @@
+class Solution {
+    long maxProduct(int n) {
+        // code here
+        if(n==0) return 0;  // edge case
+        
+        long[] dp=new long[n+1];  // defining a array for storing values
+        Arrays.fill(dp,0);
+        dp[0]=1;
+        
+        for(int i=0;i<=n;i++){    
+            for(int j=1;j<n;j++){
+                if(i+j<=n){
+                    dp[i+j]=Math.max(dp[i+j],dp[i]*j);
+                }
+            }
+        }
+        
+        return dp[n];    // we have calculated all values prior to n which are maximum
+    }
+}
