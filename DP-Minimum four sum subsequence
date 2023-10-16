@@ -1,0 +1,26 @@
+/*ghanta kuch samaj nhi aaya tha esp wo jaha value check krni hoti 
+u dont need to check the values exisit or not just update the dp array 
+dp array has values till 4th index then compare it with 5th index till the end &
+keep on updating the min values
+*/
+class GfG
+{
+	public static int minSum(int arr[], int n)
+        {
+           if(n==1) return arr[0];                               //checking for len less than 4
+           if(n==2) return Math.min(arr[0],arr[1]);
+           if(n==3) return Math.min(arr[2],Math.min(arr[0],arr[1]));
+           if(n==4) return Math.min(arr[3],Math.min(arr[2],Math.min(arr[0],arr[1])));
+           
+           int[] dp=new int[n];
+           
+           for(int i=0;i<4;i++){           // filling the first 4 values of dp same as arr
+               dp[i]=arr[i];
+           }
+           for(int i=4;i<n;i++){           // now we check for the min element of len 4
+            dp[i]=arr[i]+Math.min(dp[i-4],Math.min(dp[i-3],Math.min(dp[i-2],dp[i-1])));
+           }
+           
+           return Math.min(dp[n-4],Math.min(dp[n-3],Math.min(dp[n-2],dp[n-1]))); //printing min out of last 4 of dp array
+        }
+}
