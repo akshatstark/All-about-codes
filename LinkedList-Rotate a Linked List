@@ -1,0 +1,23 @@
+//simple approach is to make a circular list by connecting last node to 1st node and 
+//then updating the values k times accoedingly
+
+class Solution{
+    public Node rotate(Node head, int k) {
+        
+        if(head==null || head.next==null) return head;  //checks for basic cases
+        
+        Node curr=head;
+        while(curr.next!=null){
+            curr=curr.next;
+        }
+        
+        curr.next=head; // circular list has been formed
+        
+        for(int i=0;i<k;i++){
+            curr=curr.next;
+        }
+        head=curr.next;
+        curr.next=null;
+        return head;
+    }
+}
