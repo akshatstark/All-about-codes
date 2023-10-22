@@ -1,0 +1,22 @@
+class GfG
+{
+    Node removeDuplicates(Node head)
+    {
+	  
+	  Node prev=head;      // creating 2 nodes to compare with...
+	  Node curr=head.next;
+	  
+	  while(curr!=null){
+	      if(prev.data==curr.data) {    // checking if value equal or not
+	          curr=curr.next;     // if equal update the data of curr as next node
+	          prev.next=curr;     // if equal update the pointer of prev to curr...value of prev remain same
+	      }
+	      else{
+	          curr=curr.next;    // else update value of curr to next node
+	          prev=prev.next;    // else update value of prev to next node
+	      }
+	  }
+	    
+	   return head;
+    }
+}
