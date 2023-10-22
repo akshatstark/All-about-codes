@@ -1,0 +1,20 @@
+class Solution {
+    Node deleteMid(Node head) {
+        if (head == null || head.next == null) return null; // No middle to delete
+        
+        Node slow = head;
+        Node fast = head;
+        Node prev = null;   // made to keep track of prev node as slow is middle and tht should be removed
+
+        while (fast != null && fast.next != null) {
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Now 'slow' is pointing to the middle node, and 'prev' is pointing to the node before it.
+        prev.next = slow.next;
+
+        return head;
+    }
+}
