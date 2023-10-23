@@ -1,0 +1,40 @@
+// Approach:
+
+// Start at the head of the linked list.
+
+// Traverse M nodes, one at a time, while keeping track of the previous node (prev1) as you go.
+
+// After skipping M nodes, set a temporary pointer (temp1) to the current node (temp) and traverse N nodes from there.
+
+// During this N-node traversal, if you reach the end of the list (temp1.next is null), delete the remaining nodes by setting prev1.next to null and return.
+
+// If you successfully traverse N nodes or haven't reached the end yet, update prev1.next to skip over the N nodes, effectively removing them.
+
+// Repeat steps 2 to 5 until you reach the end of the list.
+class Solution
+{
+    static void linkdelete(Node head, int M, int N)
+    {
+        Node temp=head;
+        Node temp1=head;
+        Node prev=null;
+        
+        while(temp!=null){
+            for(int i=0;i<M;i++){
+                prev=temp;
+                temp=temp.next;
+                if(temp==null) return;
+            }
+            temp1=temp;
+            for(int i=0;i<N;i++){
+                if(temp1.next==null){
+                    prev.next=null;
+                    return;
+                }
+                temp1=temp1.next;
+            }
+            prev.next=temp1;
+            temp=temp1;
+        }
+    }
+}
