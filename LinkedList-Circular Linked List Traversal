@@ -1,0 +1,12 @@
+class Solution
+{
+	    void printList(Node head)
+        {
+            Node temp=head;
+            do{
+                System.out.print(temp.data+" ");
+                temp=temp.next;
+            }
+            while(temp!=head);
+	    }
+}
