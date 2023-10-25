@@ -1,0 +1,36 @@
+// compiler didnt ran so here just the code without submission...copied!!!
+class Solution {
+    
+     public void mergeAlt(Node head1, Node head2){
+       Node temp = head1;
+       Node curr = head2;
+       Node prev1 = null;
+       Node prev2 = null;
+       while(temp!=null && curr!=null)
+       {
+           prev1 = temp.next;
+           temp.next = curr;
+           temp = prev1;
+           prev2 = curr.next;
+           curr.next = temp;
+           curr = prev2;
+       }
+       
+       
+       while(head1!=null)
+       {
+           System.out.print(head1.data+" ");
+           head1 = head1.next;
+       }
+       System.out.println();                                    
+       if(curr!=null)
+       {
+           while(curr!=null)
+           {
+               System.out.print(curr.data+" ");
+               curr = curr.next;
+           }
+       }
+     
+   }
+}
