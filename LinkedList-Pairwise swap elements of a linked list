@@ -1,0 +1,16 @@
+class Solution {
+    public Node pairwiseSwap(Node head)
+    {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        
+        Node first = head;
+        Node second = head.next;
+        Node new_head = pairwiseSwap(head.next.next);
+        
+        second.next = first;
+        first.next = new_head;
+        return second;
+    }
+}
