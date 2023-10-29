@@ -1,0 +1,31 @@
+	}
+}*/
+// not much idea...just stick with the basic concepts of list and think it out...
+class MyQueue
+{
+    QueueNode front, rear;
+    
+    //Function to push an element into the queue.
+	void push(int a)
+	{
+        if(front==null){
+            front=rear=new QueueNode(a);
+        }
+        else{
+            rear.next=new QueueNode(a);
+            rear=rear.next;
+        }
+	}
+	
+    //Function to pop front element from the queue.
+	int pop()
+	{
+        if(front==null) return -1;
+        
+        int res=front.data;
+        front=front.next;
+        
+        if(front==null) rear=null;
+        return res;
+	}
+}
