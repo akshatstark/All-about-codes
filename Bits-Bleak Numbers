@@ -1,0 +1,16 @@
+class Solution
+{
+    public int is_bleak(int n)
+    {
+        //no idea of why n-32 happened but maybe coz max num of set bits is log2(n)
+ 
+        for(int i= n-1;i>=Math.max(1,n-32);i--)
+        {
+            if(i+Integer.bitCount(i)==n)
+            {
+                return 0;
+            }
+        }
+        return 1;
+    }
+}
