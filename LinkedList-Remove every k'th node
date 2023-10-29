@@ -1,0 +1,23 @@
+//khud se kia pura...
+class GfG
+{
+    Node delete(Node head, int k)
+    {
+        Node temp=head;
+        if(k==1 || temp==null) return null;  //if k=1,every node is to be deleted
+        
+        int i=1;    //counting the node value to compare it with k
+        
+        while(temp.next!=null && temp!=null){
+            i=i+1;    // increasing at start so as to update the next node accordingly
+            if(i==k){
+                temp.next=temp.next.next;
+                i=0;     //resetting the node
+            }
+            else{
+                temp=temp.next;
+            }
+        }
+        return head;
+    }
+}
