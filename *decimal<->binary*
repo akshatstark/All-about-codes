@@ -3,7 +3,7 @@ import java.util.*;
 public class Main
 {
 	public static void main(String[] args) {
-	    int x=50;
+	        int x=50;
 		System.out.println(Integer.toBinaryString(x)); // decimal to toBinary
 		int y=1010110;
 		String s=Integer.toString(y);
