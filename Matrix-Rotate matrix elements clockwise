@@ -1,0 +1,51 @@
+// took some help...it should be marked as at least medium 
+class Solution {
+    int[][] rotateMatrix(int M, int N, int Mat[][]) {
+        
+        int row=0,col=0,prev,curr,i;
+        
+        while(row<M && col<N){
+            
+            if(row+1==M || col+1==N){
+                break;
+            }
+            
+            prev=Mat[row+1][col];   //storing Mat[2][1] value
+            
+            for(i=col;i<N;i++){   // for top line
+                curr=Mat[row][i];
+                Mat[row][i]=prev;
+                prev=curr;
+            }
+            row++;        //1st row done so increased value by 1
+            
+            for(i=row;i<M;i++){    // for right line
+                curr=Mat[i][N-1];
+                Mat[i][N-1]=prev;
+                prev=curr;
+            }
+            N--;    // right line changed so decreased value
+            
+            if(row<M){   // if more than one row is left, bottom line is changed
+            
+                for(i=N-1;i>=col;i--){   // for bottom line
+                    curr=Mat[M-1][i];
+                    Mat[M-1][i]=prev;
+                    prev=curr;
+                    }
+            M--;   // bottom line changed so decreased value
+            }
+            
+            if(col<N){   // if more than one col left, left line is changed
+                
+                for(i=M-1;i>=row;i--){    // for left line
+                    curr=Mat[i][col];
+                    Mat[i][col]=prev;
+                    prev=curr;
+                }
+            col++;    // as the first border completed increasing  it
+            }
+        }
+        return Mat;
+    }
+}
