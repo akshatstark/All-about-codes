@@ -3,7 +3,7 @@ class Compute
 { 
     static void sortBySetBitCount(Integer arr[], int n)
     {
-        Arrays.sort(arr,new solve());
+        Arrays.sort(arr,new solve());  // method call used to sort an array using a custom comparator
     }
     static class solve implements Comparator<Integer>
     {
@@ -12,11 +12,11 @@ class Compute
             int aa=Integer.bitCount(a);
             int bb=Integer.bitCount(b);
             if(aa>bb)
-            return -1;
+            return -1;     // indicate that a should appear before b
             else if(aa<bb)
-            return 1;
+            return 1;      // indicate that a should appear after b
             else
-            return 0;
+            return 0;      //both are same
         }
     }
 }
