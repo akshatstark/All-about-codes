@@ -1,0 +1,22 @@
+//refer this-https://www.youtube.com/watch?v=U2adJaXhYDs
+class Compute  
+{ 
+    static void sortBySetBitCount(Integer arr[], int n)
+    {
+        Arrays.sort(arr,new solve());
+    }
+    static class solve implements Comparator<Integer>
+    {
+        public int compare(Integer a,Integer b)
+        {
+            int aa=Integer.bitCount(a);
+            int bb=Integer.bitCount(b);
+            if(aa>bb)
+            return -1;
+            else if(aa<bb)
+            return 1;
+            else
+            return 0;
+        }
+    }
+}
