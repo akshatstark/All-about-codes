@@ -1,0 +1,24 @@
+class Solution {
+    int[][] sortedMatrix(int N, int Mat[][]) {
+        
+        ArrayList<Integer> arr=new ArrayList<>();
+        for(int i=0;i<N;i++){
+            for(int j=0;j<N;j++){
+                arr.add(Mat[i][j]);
+            }
+        }
+        
+        Collections.sort(arr);   // sort in asc order
+        
+        // Collections.sort(arr, Collections.reverseOrder()); -> use this to put in desc order
+        
+        int idx=0;
+        for(int i=0;i<N;i++){
+            for(int j=0;j<N;j++){
+                Mat[i][j]=arr.get(idx);   // getting the elements aas arraylist is in 1D
+                idx++;
+            }
+        }
+        return Mat;
+    }
+};
