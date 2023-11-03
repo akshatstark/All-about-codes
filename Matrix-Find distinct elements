@@ -1,0 +1,23 @@
+class Solution{
+    static int distinct(int M[][], int N)
+    {
+        HashMap<Integer,Integer> map=new HashMap<>();      // to store keys of 1st row
+        
+        for(int i=0;i<N;i++){
+            if(!map.containsKey(M[0][i])){    // if it doenst contains key add it
+                map.put(M[0][i],1);
+            }
+        }
+
+        for(int i=1;i<N;i++){
+            HashMap<Integer,Integer> imap=new HashMap<>();    // using this map to checking multiple values in 2nd to last row ehen comparing with 1st row
+            for(int j=0;j<N;j++){
+                if(map.containsKey(M[i][j]) && !imap.containsKey(M[i][j]) ){  
+                    imap.put(M[i][j],1);
+                }
+            }
+            map.keySet().retainAll(imap.keySet());   // update the keys in the map to retain only those keys that are also present in the imap
+        }
+        return map.size();
+    }
+}
