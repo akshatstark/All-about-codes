@@ -1,0 +1,19 @@
+// KHUD SE KIYA
+class Solution {
+    int minRow(int N, int M, int A[][]) {
+        int c=Integer.MAX_VALUE,idx=0;;
+        for(int i=0;i<N;i++){
+            int t=0;
+            for(int j=0;j<M;j++){
+                if(A[i][j]==1) t++;
+            }
+            if(c>t) {
+                c=t;
+                idx=i;
+            }
+        
+    }
+    return idx+1;
+        
+    }
+};
