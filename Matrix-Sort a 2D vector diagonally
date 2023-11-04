@@ -1,0 +1,59 @@
+// do it in 2 parts- lower triangle and upper triangle
+class Solution
+{
+    void diagonalSort(int matrix[][], int n, int m)
+    {
+        
+       int r=0,c=0,k=0;
+       
+       for(int i=1;i<n;i++){          // for the lower left triangle
+           
+           ArrayList<Integer> lt=new ArrayList<>(); 
+           
+           r=i;
+           c=0;
+           while(r<n && c<m){        // adding ele diagonally to arraylist
+               lt.add(matrix[r][c]);
+               r++;
+               c++;
+           }
+           
+           Collections.sort(lt);     // asc order
+           
+           r=i;
+           c=0;
+           k=0;
+           while(r<n && c<m){          // updating the matrix
+               matrix[r][c]=lt.get(k);
+               r++;
+               c++;
+               k++;
+           }
+       }
+       
+       for(int j=1;j<m;j++){          // for upper ryt triangle
+           
+           ArrayList<Integer> rt=new ArrayList<>();
+           
+           r=0;
+           c=j;
+           while(r<n && c<m){        // adding ele diagonally to arraylist
+               rt.add(matrix[r][c]);
+               r++;
+               c++;
+           }
+           
+           Collections.sort(rt,Collections.reverseOrder());     // desc order
+           
+           r=0;
+           c=j;
+           k=0;
+           while(r<n && c<m){          // updating the matrix
+               matrix[r][c]=rt.get(k);
+               r++;
+               c++;
+               k++;
+           }
+       }
+    }
+}
