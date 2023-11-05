@@ -1,0 +1,49 @@
+// ques is of checking common values so use maps or sort it
+
+//hash-map->
+// class Compute {
+//     public String isSubset( long a1[], long a2[], long n, long m) {
+//         HashMap<Long,Integer> map=new HashMap<>();
+//         for(int i=0;i<n;i++){
+//             map.put(a1[i],map.getOrDefault(a1[i],0)+1);  //it returns value of key or it returns default value (here=0)if not found
+//         }
+//         // above we have mapped the keys alongwith ttheir freq.
+//         for(int i=0;i<m;i++){
+//             if(map.containsKey(a2[i])){
+//                 int rpt=map.get(a2[i]);  // getting the frequency of key
+//                 if(rpt>0) {              // at least one value is present...done for duplicate values
+//                     map.remove(a2[i]);
+//                     map.put(a2[i], rpt - 1);    // storing key with one reduced freq.
+//                 }
+//                 else{
+//                     return "No";
+//                 }
+//             }
+//             if(!map.containsKey(a2[i])) {
+//                 return "No";}
+            
+//         }
+//         return "Yes";
+//     }
+// }
+
+//sorting->
+class Compute {
+    public String isSubset(long a1[], long a2[], long n, long m) {
+        Arrays.sort(a1);
+        Arrays.sort(a2);
+
+        int i = 0, j = 0;
+
+        while (i < n && j < m) {
+            if (a2[j] < a1[i]) {
+                return "No"; // If an element from a2 is smaller than a1, a2 cannot be a subset.
+            } else if (a2[j] == a1[i]) {
+                j++; // Increment j to move to the next element in a2.
+            }
+            i++; // Always increment i to move to the next element in a1.
+        }
+
+        return (j == m) ? "Yes" : "No";
+    }
+}
