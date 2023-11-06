@@ -1,0 +1,12 @@
+// ratta maar le sol.
+class Solution {
+    static long squaresInMatrix(int m, int n) {
+        long res=0;
+        while(m>0 && n>0){
+            res+=m*n;
+            m--;
+            n--;
+        }
+        return res;
+    }
+};
