@@ -1,0 +1,15 @@
+// for effective sorting and finding we use pr. queue as it store data in min heap by default
+class Solution{
+    public static int kthSmallest(int[] arr, int l, int r, int k) 
+    { 
+        PriorityQueue<Integer> pq=new PriorityQueue<>();
+        for(int i=0;i<r+1;i++){
+            pq.add(arr[i]);
+        }
+        while(k!=1){
+            pq.poll();
+            k--;
+        }
+        return pq.peek();
+    } 
+}
