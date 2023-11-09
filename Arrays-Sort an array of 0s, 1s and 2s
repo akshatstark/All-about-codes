@@ -1,0 +1,39 @@
+//  just use Arrays.sort(a);
+
+// but here we will use Dutch National Flag algo
+class Solution {
+    public static void sort012(int a[], int n) {
+        // Initialize three pointers to partition the array
+        int start = 0, mid = 0, end = n - 1;
+
+        // Continue until the middle pointer crosses the end pointer
+        while (mid <= end) {
+            // Check the value at the middle pointer
+            switch (a[mid]) {
+                // If it is 0, swap with the element at the start pointer, and move both pointers
+                case 0:
+                    swap(a, start, mid);
+                    start++;
+                    mid++;
+                    break;
+
+                // If it is 1, just move the middle pointer
+                case 1:
+                    mid++;
+                    break;
+
+                // If it is 2, swap with the element at the end pointer, and move the end pointer
+                case 2:
+                    swap(a, mid, end);
+                    end--;
+                    break;
+            }
+        }
+    }
+
+    public static void swap(int a[], int pos1, int pos2) {               // Swap the elements
+        int temp = a[pos1];       
+        a[pos1] = a[pos2];
+        a[pos2] = temp;
+    }
+}
