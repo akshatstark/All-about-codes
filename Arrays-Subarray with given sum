@@ -1,0 +1,35 @@
+// using 2 pointer to reduce nested loop... -> example of sliding window
+class Solution {
+    static ArrayList<Integer> subarraySum(int[] arr, int n, int s) {
+        
+        ArrayList<Integer> res = new ArrayList<>();
+        
+        int left = 0, ryt = 0, sum = 0;
+        
+        if(s==0){              // handling an edge case
+            res.add(-1);
+            return res;
+        }
+
+        while (ryt < n || sum > s) {     // right pointer should be less then size OR sum be greater than requred sum
+        
+            if (sum < s) {               // if sum is less than req sum, move the ryt pointer 
+                sum += arr[ryt];
+                ryt++;
+            } 
+            else if (sum > s) {          // if sum is more than req sum, move the left pointer
+                sum -= arr[left];
+                left++;
+            }
+
+            if (sum == s) {    
+                res.add(left + 1);
+                res.add(ryt);
+                return res;
+            }
+        }
+
+        res.add(-1); // Indicates no subarray found
+        return res;
+    }
+}
