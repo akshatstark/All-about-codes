@@ -1,0 +1,28 @@
+// here we have to make changes in same array while preserving the order of ele.
+// make 2 sepperatte arraylist and updayte the main array
+
+class Solution {
+
+    public void segregateElements(int arr[], int n) {
+        ArrayList<Integer> pos = new ArrayList<>();
+        ArrayList<Integer> zero = new ArrayList<>();
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > 0) {
+                pos.add(arr[i]);
+            } else {
+                zero.add(arr[i]);
+            }
+        }
+
+        int i = 0;
+        for (int num : pos) {
+            arr[i++] = num;
+        }
+
+        for (int num : zero) {
+            arr[i++] = num;
+        }
+        
+    }
+}
