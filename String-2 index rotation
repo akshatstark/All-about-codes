@@ -1,0 +1,18 @@
+class Solution
+{
+   
+    public static boolean isRotated(String str1, String str2)
+    {
+        int n = str1.length();
+        if (str1.length() != str2.length()) return false;
+        if (n <= 2 && str1.equals(str2))
+            return true;
+
+        String A = str1.substring(2) + str1.substring(0, 2);
+        String B = str1.substring(n - 2) + str1.substring(0, n - 2);
+        if (A.equals(str2) || B.equals(str2))
+            return true;
+        else
+            return false;
+    }
+}
