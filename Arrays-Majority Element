@@ -1,0 +1,22 @@
+// here we have to do on O(n) TC and we have to traverse array & store thier freq so we use map
+class Solution
+{
+    static int majorityElement(int a[], int size)
+    {
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<size;i++){
+            if(!map.containsKey(a[i])) map.put(a[i],1);
+            
+            else map.put(a[i],map.get(a[i])+1);
+        }
+        
+        int ans=-1;
+        
+        for(Map.Entry<Integer,Integer> el:map.entrySet()){
+            
+            if(el.getValue()>size/2)  ans=el.getKey();
+        }
+        
+        return ans;
+    }
+}
