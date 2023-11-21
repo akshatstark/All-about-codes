@@ -1,0 +1,17 @@
+// here we have to traverse full map to find duplicates so we use maps and manuplate with freq.
+class Solution {
+    public static ArrayList<Integer> duplicates(int arr[], int n) {
+        HashMap<Integer,Integer> map=new HashMap<>();
+        ArrayList<Integer> al=new ArrayList<>();
+        for(int i=0;i<n;i++){
+            if(!map.containsKey(arr[i])) map.put(arr[i],1);
+            else if(map.containsKey(arr[i]) && map.get(arr[i])>0){  // to avoid values getting repeated
+                map.put(arr[i],0);
+                al.add(arr[i]);
+            }
+        }
+        if(al.isEmpty()) al.add(-1);
+        Collections.sort(al);          // this was required as pers test cases
+        return al;
+    }
+}
