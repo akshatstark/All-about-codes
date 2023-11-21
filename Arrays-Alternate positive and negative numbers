@@ -1,0 +1,38 @@
+// store pos and neg in arraylist and then combine alternatively
+public class Solution {
+    void rearrange(int arr[], int n) {
+        
+        // Create two ArrayLists to store positive and negative elements separately
+        ArrayList<Integer> positive = new ArrayList<>();
+        ArrayList<Integer> negative = new ArrayList<>();
+        
+        // Separate positive and negative elements into different ArrayLists
+        for (int i = 0; i < n; i++) {
+            if (arr[i] >= 0) {
+                positive.add(arr[i]); // Add positive elements to the positive ArrayList
+            }
+            if (arr[i] < 0) {
+                negative.add(arr[i]); // Add negative elements to the negative ArrayList
+            }
+        }
+        
+        // Merge positive and negative elements alternatively into the original array
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        while (i < positive.size() && j < negative.size()) {
+            arr[k++] = positive.get(i++); // Add positive element
+            arr[k++] = negative.get(j++); // Add negative element
+        }
+        
+        // Add remaining positive elements if any
+        while (i < positive.size() && k < n) {
+            arr[k++] = positive.get(i++);
+        }
+        
+        // Add remaining negative elements if any
+        while (j < negative.size() && k < n) {
+            arr[k++] = negative.get(j++);
+        }
+    }
+}
