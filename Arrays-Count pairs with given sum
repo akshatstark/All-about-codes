@@ -1,0 +1,22 @@
+// here is a 2 sum problem ig , we will use maps to store values and manuplate freq and will use basic maths 
+class Solution {
+    int getPairsCount(int[] arr, int n, int k) {
+        
+        int c=0;
+        Map<Integer,Integer> map=new HashMap<>();
+        
+        for(int i=0;i<n;i++){
+            
+            if(map.containsKey(k-arr[i])) c+=map.get(k-arr[i]);
+            
+            //else if(map.containsKey(arr[i])) map.put(arr[i],map.get(arr[i])+1);  // this will not work use if... as it is only evaluated after all if statements hence its dependant
+            
+            if(map.containsKey(arr[i])) map.put(arr[i],map.get(arr[i])+1);
+            
+            else{
+                map.put(arr[i],1);
+            }
+        }
+        return c;
+    }
+}
