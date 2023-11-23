@@ -1,0 +1,23 @@
+// dont overthink it...its ez
+//store every value with freq and then return the first value greater then 1 freq
+class Solution {
+    public static int firstRepeated(int[] arr, int n) {
+        Map<Integer,Integer> map=new HashMap<>();
+        
+        for(int i=0;i<n;i++){
+            if (map.containsKey(arr[i])) {
+                map.put(arr[i], 1 + map.get(arr[i]));
+            }
+            else {
+                map.put(arr[i], 1);
+            }
+
+        }
+        for(int i=0;i<n;i++){
+            if(map.get(arr[i])>1) {
+                return i+1;
+            }
+        }
+        return -1;
+    }
+}
