@@ -1,0 +1,28 @@
+// you did it yourself 
+// stored 3 arrays unique values then worked with frequencies...
+class Solution
+{
+    ArrayList<Integer> commonElements(int A[], int B[], int C[], int n1, int n2, int n3) 
+    {
+        HashMap<Integer,Integer> map=new HashMap<>();
+        ArrayList<Integer> arr=new ArrayList<>();
+        for(int i=0;i<n1;i++){
+            if (!map.containsKey(A[i])){
+                map.put(A[i],1);
+            }
+        }
+        for(int j=0;j<n2;j++){
+            if(map.containsKey(B[j]) && map.get(B[j])==1){
+                map.put(B[j],map.get(B[j])+1);
+            }
+        }
+        for(int k=0;k<n3;k++){
+            if(map.containsKey(C[k]) && map.get(C[k])>1){
+                arr.add(C[k]);
+                map.remove(C[k]);         // duplication not allowed so removed when done
+            }
+        }
+        
+        return arr;
+    }
+}
