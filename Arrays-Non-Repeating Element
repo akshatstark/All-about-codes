@@ -1,0 +1,22 @@
+// dont overthink it...its ez
+// store all values with freq then return the first value with freq 1
+class Check{
+    
+    public int firstNonRepeating(int arr[], int n) 
+    { 
+        Map<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<n;i++){
+            if(map.containsKey(arr[i])){
+                map.put(arr[i],1+map.get(arr[i]));
+            }
+            else{
+                map.put(arr[i],1);
+            }
+        }
+        
+         for(int i=0;i<n;i++){
+             if(map.get(arr[i])==1) return arr[i];
+         }
+         return 0;
+    }  
+}
