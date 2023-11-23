@@ -1,0 +1,30 @@
+// very smart sol...rem this
+// ques is of subarrays & we have to calculate equal no of 1 and 2
+// here we will treat 0 as -1 and then store these sum in hmaps...if we found same sum tht means the index range of current and last time it occured has same 1 & 0
+class Solution
+{
+    //Function to count subarrays with 1s and 0s.
+    static int countSubarrWithEqualZeroAndOne(int arr[], int n)
+    {
+        Map<Integer,Integer> map=new HashMap<>();
+        int sum=0,ans=0;
+        map.put(0,1);
+        for(int i=0;i<n;i++){
+            if(arr[i]==0){
+                sum+=-1;
+            }
+            else{
+                sum+=1;
+            }
+        
+            if(!map.containsKey(sum)){
+                map.put(sum,1);
+            }
+            else{
+                ans+=map.get(sum);
+                map.put(sum,map.get(sum)+1);
+            }
+        }
+        return ans;
+    }
+}
