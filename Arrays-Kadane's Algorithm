@@ -1,0 +1,14 @@
+class Solution{
+    long maxSubarraySum(int arr[], int n){
+        long res=Integer.MIN_VALUE,sum=0;
+        for(int i=0;i<n;i++){
+            sum+=arr[i];          // adding the sum of ele 
+            
+            if(res<sum) res=sum;  // updating res if sum exceeds its prev value
+            
+            if(0>sum) sum=0;      // if sum results in a negative vaue drop tht sub array
+        }
+        return res;
+    }
+    
+}
