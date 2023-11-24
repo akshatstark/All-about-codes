@@ -1,0 +1,19 @@
+//yt ref->nikhil lohia max prod subarray
+
+class Solution {
+    long maxProduct(int[] arr, int n) {
+        long prod=arr[0];       // if there only 1 ele
+        long left=1,ryt=1;
+        for(int i=0;i<n;i++){
+            
+            left=left*arr[i];      // update the left and ryt pointers
+            ryt=ryt*arr[n-i-1];
+            
+            prod=Math.max(prod,Math.max(left,ryt));      // saving the max value of prod 
+            
+            left=left==0?1:left;        // if we find any 0 then resetting the pointer value to 1 so as to skip tht ele and calculate fresh frm next index
+            ryt=ryt==0?1:ryt;
+        }
+        return prod;
+    }
+}
