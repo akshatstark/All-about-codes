@@ -1,0 +1,25 @@
+//classic use of Big Integer
+
+class Solution {
+    static ArrayList<Integer> factorial(int N){
+        
+        ArrayList<Integer> arr=new ArrayList<>();
+        
+        java.math.BigInteger x=java.math.BigInteger.ONE;
+        
+        for(int i=N;i>0;i--){
+            x=x.multiply(java.math.BigInteger.valueOf(i));
+        }
+        
+        int rem=N;
+        
+        while (!x.equals(java.math.BigInteger.ZERO)) {
+            
+            arr.add(x.mod(java.math.BigInteger.TEN).intValue());
+            
+            x = x.divide(java.math.BigInteger.TEN);
+        }
+        Collections.reverse(arr);
+        return arr;
+    }
+}
