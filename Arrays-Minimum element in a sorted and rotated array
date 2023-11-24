@@ -1,0 +1,14 @@
+// here may or may not be rotated...anyways just follow pattern
+
+class Solution
+{
+    int findMin(int arr[], int n)
+    {
+        int i=0;
+        while(arr[i]<arr[i+1] && i<n-2){    // if its rotated it'll follow asc order until we found rotated point i.e min ele
+            i+=1;
+            if(i==n-2 && arr[n-1]>arr[n-2]) return arr[0];   // edge case if last ele is min
+        }
+        return arr[i+1];
+    }
+}
