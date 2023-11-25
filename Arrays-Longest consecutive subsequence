@@ -1,0 +1,65 @@
+// we have to remove duplicates and move in as order so used tree set...
+// we can use hash for better tc
+class Solution{   
+	static int findLongestConseqSubseq(int arr[], int N) {
+        TreeSet<Integer> set = new TreeSet<>();
+        
+        // Adding elements from the array to the TreeSet to get unique elements
+        for (int i = 0; i < N; i++) {
+            set.add(arr[i]);
+        }
+        
+        int c = 0;
+        int prev =Integer.MIN_VALUE; ; // Get the first element from the TreeSet
+        int temp = 0;
+        Iterator<Integer> itr=set.iterator();
+        while(itr.hasNext()){
+            
+            int curr=itr.next(); // Get the next element from the TreeSet
+            
+            // Check if the next element is consecutive to the current element
+            if (curr == prev + 1) {
+                c++; // Increment the consecutive count
+            } else {
+                c = 1; // Reset the consecutive count if elements are not consecutive
+            }
+            
+            temp = Math.max(temp, c); // Update the maximum count when the sequence ends
+            
+            prev = curr; // Update the current element to the next element
+        }
+        
+        return temp ; // Return the length of the longest consecutive subsequence
+    }
+}
+
+
+// hash sol->
+static int findLongestConseqSubseq(int arr[], int N) {
+    int count = 0;
+    int longest = 1;
+    Set<Integer> set = new HashSet<>();
+    
+    // Adds all elements from the input array into a HashSet to remove duplicates
+    for (int element : arr) {
+        set.add(element);
+    }
+    
+    // Iterates through unique elements in the HashSet to find consecutive sequences
+    for (int unique : set) {
+        // Checks if the current number is the starting number of a sequence
+            count = 1; // Initializes the count for the new sequence
+            int seq = unique;
+            
+            // Increments 'seq' to find consecutive numbers in the sequence
+            while (set.contains(seq + 1)) {
+                seq += 1; // Increment 'seq'
+                count++; // Increment the count for each consecutive number in the sequence
+            }
+            
+            // Update 'longest' with the maximum length found so far among sequences
+            longest = Math.max(longest, count);
+    }
+    
+    return longest; // Returns the length of the longest consecutive subsequence
+}
