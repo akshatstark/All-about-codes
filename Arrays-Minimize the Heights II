@@ -1,0 +1,20 @@
+// its a ques where we are manupulating the min and max tower to get min diff btw highest and lowest
+class Solution {
+    int getMinDiff(int[] arr, int n, int k) {
+        Arrays.sort(arr);
+        int res=arr[n-1]-arr[0];  // this is the max diff logically we have to cal. min than this
+        
+        int max,min;
+        
+        for(int i=1;i<=n-1;i++){
+            
+            if(arr[i]>=k){
+            max=Math.max(arr[n-1]-k,arr[i-1]+k);  // it compares the max value btw highest tower -k and curr tower +k
+            min=Math.min(arr[0]+k,arr[i]-k);      // it compares the min value btw lowest tower +k and curr tower -k
+            
+            res=Math.min(res,max-min);     
+            }
+        }
+        return res;
+    }
+}
