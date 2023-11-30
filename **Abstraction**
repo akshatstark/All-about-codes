@@ -75,25 +75,33 @@ class Main{
 }
 
 // Abstraction using interface
-interface Study{
-    void time();
-    void subjects();
+
+interface Study {
+    void time();     // Declare an abstract method 'time'
+    void subjects(); // Declare an abstract method 'subjects'
 }
-abstract class Student implements Study{
-    public void subjects(){
+
+abstract class Student implements Study {
+    public void subjects() {
+        // Provide a default implementation for the 'subjects' method
         System.out.println("Focus on all subjects");
     }
 }
-class Time extends Student{
-    public void time(){
+
+class Time extends Student {
+    public void time() {
+        // Implement the 'time' method specific to the 'Time' class
         System.out.println("Make proper time table");
     }
 }
-public class Main{
-    public static void main(String[] args){
-        Time t;
-        t=new Time();
-        t.subjects();
-        t.time();
+
+public class Main {
+    public static void main(String[] args) {
+        Time t; // Declare a reference of type 'Time'
+        t = new Time(); // Instantiate the 'Time' class and assign it to 't'
+
+        t.subjects(); // Call the 'subjects' method from the 'Time' object
+        t.time();     // Call the 'time' method from the 'Time' object
     }
 }
+
