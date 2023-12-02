@@ -1,5 +1,4 @@
 // ratta maar le...
-
 class Solution
 {
     public static int[] calculateSpan(int price[], int n)
@@ -8,16 +7,14 @@ class Solution
         int ans []= new int[n];
         for(int i = 0; i < n; i++)
         {
-            while(!st.isEmpty() && price[i] >= price[st.peek()])
+            while(!st.isEmpty() && arr[i] >= arr[st.peek()])    // pop till you find a smaller element
                 st.pop();
-            if(st.isEmpty())
+            if(st.isEmpty())    // if stack becomes empty increment by 1
                 ans[i] = i+1;
             else
                 ans[i] = i - st.peek() ;
-                
-            st.push(i);
+            st.push(i);      // storing the idx- 0 1 2....n
         }
         return ans;
     }
-    
 }
