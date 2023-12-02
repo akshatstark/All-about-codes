@@ -1,0 +1,20 @@
+// here we have to work with rotated arrays in O(N), for doing this add the sum of prev array in curr , its math
+// S1= s0 + sum of S0 - n*last ele
+class GfG
+{
+    int max_sum(int A[], int n)
+    {
+	  int sum=0, S0=0;
+	  for(int i=0;i<n;i++){
+	      S0+=i*A[i];
+	      sum+=A[i];
+	  }
+	  int Scurr,max=S0;
+	  for(int i=0;i<n-1;i++){
+	      Scurr= S0+sum-(n*A[n-i-1]);
+	      S0=Scurr;
+	      max=Math.max(max,Scurr);
+	  }
+	  return max;
+    }	
+}
