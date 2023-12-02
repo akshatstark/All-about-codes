@@ -1,0 +1,30 @@
+// problem in dealing with time and have no idea
+// here we have to see the dep tym of and arr tym of train ...although i dont exactly get it
+class Solution
+{
+    //Function to find the minimum number of platforms required at the
+    //railway station such that no train waits.
+    static int findPlatform(int arr[], int dep[], int n)
+    {
+        Arrays.sort(arr);
+        Arrays.sort(dep);
+        
+        int platformsNeeded = 1; 
+        int result = 1; 
+        int i = 1, j = 0;
+        
+        // Iterate through the arrays using a two-pointer approach
+        while (i < n && j < n) {
+            if (arr[i] <= dep[j]) {
+                platformsNeeded++;  // Increment platforms needed if train arrives before or at the same time as departure
+                i++;                // Move to the next arrival time
+            } else if (arr[i] > dep[j]) {
+                platformsNeeded--;  // Decrement platforms needed if train departs before next arrival
+                j++;               // Move to the next departure time
+            }
+            result = Math.max(result, platformsNeeded);      // Update the maximum platforms needed
+        }
+        
+        return result; 
+    }
+}
