@@ -1,0 +1,45 @@
+class Solution
+{
+    static ArrayList<Integer> spirallyTraverse(int matrix[][], int r, int c)
+    {
+        int top=0,down=r-1,left=0,ryt=c-1;
+        int d=0;
+        
+        ArrayList<Integer> arr=new ArrayList<Integer>();
+        
+        while(top<=down && left<=ryt){
+            
+            if(d==0){                   // printing from left to ryt and remove 1st row by increasing top
+                for(int i=left;i<=ryt;i++){
+                    arr.add(matrix[top][i]);
+                }
+                top++;
+            }
+            
+            if(d==1){
+                for(int i=top;i<=down;i++){
+                    arr.add(matrix[i][ryt]);
+                }
+                ryt--;
+            }
+            
+            if(d==2){
+                for(int i=ryt;i>=left;i--){
+                    arr.add(matrix[down][i]);
+                }
+                down--;
+            }
+            
+            if(d==3){
+                for(int i=down;i>=top;i--){
+                    arr.add(matrix[i][left]);
+                }
+                left++;
+            }
+            
+            d=(d+1)%4;      // done to control direction in which ele to be added- without this 1 extra iteration will be done
+        }
+        
+        return arr;
+    }
+}
