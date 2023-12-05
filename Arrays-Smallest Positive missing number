@@ -1,0 +1,17 @@
+// we use hashset so that we dont store dupicate values...then if set has smallest int then increament by 1
+class Solution
+{
+    static int missingNumber(int arr[], int size)
+    {
+        int res=1;
+        HashSet<Integer> set = new HashSet<>();
+        for(int i=0;i<size;i++){        // adding all ele to hashset
+            set.add(arr[i]);
+        }
+        
+        for(int i=0;i<size;i++){
+            if(set.contains(res)) res++;           // if set contains smalles missing int increament it by 1
+        }
+        return res;
+    }
+}
