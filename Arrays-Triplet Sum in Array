@@ -1,0 +1,25 @@
+// three sum- use 2 pointer approach while using a for loop to calc sum at every index...
+class Solution {
+    public static boolean find3Numbers(int A[], int n, int X) { 
+        Arrays.sort(A);
+
+        for(int i = 0; i < n; i++) {
+            int curr = i + 1;       // Set current pointer to next element after A[i]
+            int last = n - 1;       // Set last pointer to the last element of the array
+          
+            while(last > curr) {
+                int sum = A[i] + A[curr] + A[last]; // Calculate sum of three elements
+                
+                if(sum == X)
+                    return true;
+                
+                if(sum < X)    // If sum is less than X, move the current pointer to the right to increase the sum
+                    curr++;
+                
+                if(sum > X) // If sum is greater than X, move the last pointer to the left to decrease the sum
+                    last--;
+            }
+        }
+        return false;
+    }
+}
