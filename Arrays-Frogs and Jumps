@@ -1,0 +1,19 @@
+class Solution {
+    public int unvisitedLeaves(int N, int leaves, int frogs[]) {
+        HashSet<Integer> set=new HashSet<>();
+        
+        for(int i=0;i<N;i++){
+           
+            int k=frogs[i];
+            if(!set.contains(k)){
+                  while(k<=leaves ){
+                
+                    set.add(k);
+                
+                     k+=frogs[i];
+                }
+            }          
+        }
+        return leaves-set.size();
+    }
+}
