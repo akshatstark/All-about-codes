@@ -77,3 +77,5 @@ public class Solution {
         return prev;
     }
 }
+
+for k jumps use for loop -> https://www.youtube.com/watch?v=Kmh3rhyEtB8&list=PLg0aancPZwRazLXPEW-vu517p3gXVCn0b&index=4
