@@ -1,0 +1,79 @@
+// Recursion->
+
+public class Solution {
+    public static int frogJump(int n, int heights[]) {
+        return recursion(heights,n-1);
+    }
+    static int recursion(int[] heights,int n){
+        if(n==0) return 0;
+
+        int one=recursion(heights, n-1)+Math.abs(heights[n]-heights[n-1]);    // for counting 1 steps
+
+        int two=Integer.MAX_VALUE;      // declaring here if n is never > 1
+        if(n>1)
+        two=recursion(heights, n-2)+Math.abs(heights[n]-heights[n-2]);       // for counting 2 steps
+        return Math.min(one, two);
+    }
+}
+
+// Memoization->   Initialize dp array; check if dp[idx] present or not; update dp array
+
+public class Solution {
+    public static int frogJump(int n, int heights[]) {
+        int[] dp=new int[n+1];
+        Arrays.fill(dp, -1);
+        return memoization(heights,n-1,dp);
+    }
+    static int memoization(int[] heights,int n,int[] dp){
+        if(n==0) return 0;
+
+        if(dp[n]!=-1) return dp[n];
+
+        int one=memoization(heights, n-1,dp)+Math.abs(heights[n]-heights[n-1]);
+
+        int two=Integer.MAX_VALUE; 
+        if(n>1)
+        two=memoization(heights, n-2,dp)+Math.abs(heights[n]-heights[n-2]);
+        return dp[n]= Math.min(one, two);
+    }
+}
+
+// Tabulation->   Bottom-Up - use for loop for iteration; update dp array
+
+public class Solution {
+    public static int frogJump(int n, int heights[]) {
+        int[] dp=new int[n+1];
+
+        dp[0]=0;
+
+        for(int i=1;i<n;i++){
+            int one= dp[i-1]+ Math.abs(heights[i]-heights[i-1]);
+            int two=Integer.MAX_VALUE;
+            if(i>1)
+            two= dp[i-2]+ Math.abs(heights[i]-heights[i-2]);
+
+            dp[i]=Math.min(one,two);
+        }
+        return dp[n-1];
+    }
+}
+
+Space Optimization->  replace the dp array by prev,prev2 and curr integers
+
+public class Solution {
+    public static int frogJump(int n, int heights[]) {
+        int prev=0,prev2=0;
+
+        for(int i=1;i<n;i++){
+            int one= prev+ Math.abs(heights[i]-heights[i-1]);
+            int two=Integer.MAX_VALUE;
+            if(i>1)
+            two= prev2+ Math.abs(heights[i]-heights[i-2]);
+
+            int curr=Math.min(one,two);
+            prev2=prev;
+            prev=curr;
+        }
+        return prev;
+    }
+}
