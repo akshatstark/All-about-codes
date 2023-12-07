@@ -1,0 +1,24 @@
+// khud se kia...
+// calcuate sum of array the add one and check if prime or not; if prime res-sum is answer
+class Solution
+{
+    public int minNumber(int arr[], int N)
+    {
+        int sum=0;
+        for(int i=0;i<N;i++){
+            sum+=arr[i];
+        }
+        int res=sum;
+        boolean flag=true;
+        while(flag){
+            for(int i=2;i<=res/2;i++){    
+                if(res%i==0) break;       // hence no. is not prime
+                
+                if(i>=res/2-1 && res%i!=0) return res-sum;     // 2 to num/2 traveled and hence not prime
+            }
+            res++;    // check for next integer
+        }
+        
+        return res-sum;
+    }
+}
