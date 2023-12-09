@@ -1,0 +1,33 @@
+// sol. based on adjacent ele dp problem
+public class Solution {
+	static long solve(ArrayList<Integer> arr){
+		int sz=arr.size();
+
+		long prev=arr.get(0);
+		long prev2=0;
+
+		for(int i=1;i<sz;i++){
+			long pick=arr.get(i)+prev2;
+			long not_pick=0+prev;
+
+			long curr=Math.max(pick,not_pick);
+			prev2=prev;
+			prev=curr;
+		}
+		return prev;
+	}
+	public static long houseRobber(int[] valueInHouse) {
+		int n=valueInHouse.length;
+
+		if(n==1) return valueInHouse[0];
+
+		ArrayList<Integer> arr1=new ArrayList<Integer>();
+		ArrayList<Integer> arr2=new ArrayList<Integer>();
+
+		for(int i=0;i<n;i++){
+			if(i!=0) arr1.add(valueInHouse[i]);
+			if(i!=n-1) arr2.add(valueInHouse[i]);
+		}
+		return Math.max(solve(arr1), solve(arr2));
+	}	
+}
