@@ -1,0 +1,82 @@
+//Recursion->
+
+public class Solution {
+	static int solve(ArrayList<Integer> nums,int n){
+		if(n==0) return nums.get(n);
+		if(n<0) return 0;
+
+		int pick=nums.get(n)+solve(nums,n-2);
+		int not_pick=0+solve(nums, n-1);
+
+		return Math.max(pick, not_pick);
+	}
+	public static int maximumNonAdjacentSum(ArrayList<Integer> nums) {
+		int n=nums.size();
+		return solve(nums,n-1);
+	}
+}
+
+//Memoization->
+
+public class Solution {
+	static int solve(ArrayList<Integer> nums,int n,int[] dp){
+		if(n==0) return nums.get(n);
+		if(n<0) return 0;
+
+		if(dp[n]!=-1) return dp[n];
+
+		int pick=nums.get(n)+solve(nums,n-2,dp);
+		int not_pick=0+solve(nums, n-1,dp);
+
+		return dp[n]=Math.max(pick, not_pick);
+	}
+	public static int maximumNonAdjacentSum(ArrayList<Integer> nums) {
+		int n=nums.size();
+		int[] dp=new int[n];
+		Arrays.fill(dp, -1);
+		return solve(nums,n-1,dp);
+	}
+}
+
+//Tabulation->
+
+public class Solution {
+	public static int maximumNonAdjacentSum(ArrayList<Integer> nums) {
+		int n=nums.size();
+		int[] dp=new int[n];
+
+		dp[0]= nums.get(0);
+		int neg=0;
+
+		for(int i=1;i<n;i++){
+			int pick=nums.get(i);
+			if(i>1) pick+=dp[i-2];
+		    int not_pick=0+dp[i-1];
+
+			dp[i]=Math.max(pick, not_pick);
+		}
+		return dp[n-1];
+	}
+}
+
+//Space Optimization->
+
+public class Solution {
+	public static int maximumNonAdjacentSum(ArrayList<Integer> nums) {
+		int n=nums.size();
+
+		int prev=nums.get(0);
+		int prev2=0;
+
+		for(int i=1;i<n;i++){
+			int pick=nums.get(i)+prev2;
+		    int not_pick=0+prev;
+
+			int curr=Math.max(pick, not_pick);
+
+			prev2=prev;
+			prev=curr;
+		}
+		return prev;
+	}
+}
