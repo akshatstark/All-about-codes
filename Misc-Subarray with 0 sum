@@ -1,0 +1,16 @@
+// here we have to find subarray which add upto 0
+class Solution{
+    static boolean findsum(int arr[],int n)
+    {
+        Set<Integer> set=new HashSet<Integer>();
+        int sum=0;
+        for(int i=0;i<n;i++){
+            sum+=arr[i];
+            
+            if(arr[i]==0 || sum==0 || set.contains(sum)) return true; 
+            
+            set.add(sum);
+        }
+        return false;
+    }
+}
