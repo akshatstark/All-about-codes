@@ -1,0 +1,15 @@
+// https://www.youtube.com/watch?v=KDW2Xv122xg
+class Solution{
+    static long maximumSumSubarray(int K, ArrayList<Integer> Arr,int N){
+        long sum=0;
+        for(int i=0;i<K;i++){     // here we check sum a subarray of len K
+            sum+=Arr.get(i);
+        }
+        long res=sum;
+        for(int i=K;i<N;i++){                   // then we start with already summed idx to last of array
+            sum=sum+Arr.get(i)-Arr.get(i-K);    // removing the last ele and adding new ele
+            res=Math.max(sum,res);
+        }
+        return res;
+    }
+}
