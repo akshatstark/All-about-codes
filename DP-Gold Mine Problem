@@ -1,42 +1,23 @@
+// we can use dp here but here is a simpler approach -> https://www.youtube.com/watch?v=tQU4rkmPyV0
+// we have used the given matric and updated the max possible values from 2nd last col. to col. 0 and calulated max
 class Solution{
-    public static int findMaxGold(int i, int j, int n, int m, int[][] mat, int[][] dp){
-        if(i < 0 || i >= n || j >= m)
-            return 0;
-        if(dp[i][j] != -1){
-            return dp[i][j];
-        }
-        
-        int[][] dirs = new int[][]
-            {
-                new int[] {-1, 1},
-                new int[] {0, 1},
-                new int[] {1, 1}
-            };
-        int max = Integer.MIN_VALUE;
-        for(int x = 0; x < 3; x++){
-            int ii = i + dirs[x][0];
-            int jj = j + dirs[x][1];
-            max = Math.max(max, findMaxGold(ii, jj, n, m, mat, dp));
-        }
-        dp[i][j] = mat[i][j] + max;
-        return dp[i][j];
-    }
+
     static int maxGold(int n, int m, int M[][])
     {
-        int[][] dp = new int[n][m];
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < m; j++){
-                dp[i][j] = -1;
+        for(int i=m-2;i>=0;i--){
+            for(int j=0;j<n;j++){
+                
+                int ryt= M[j][i+1];
+                int upryt= (j==0)?0:M[j-1][i+1];
+                int downryt= (j==n-1)?0:M[j+1][i+1];
+                
+                M[j][i]+=Math.max(ryt,Math.max(upryt,downryt));
             }
         }
-        for(int i = 0; i < n; i++){
-            findMaxGold(i, 0, n, m, M, dp);
+        int ans=M[0][0];
+        for(int i=1;i<n;i++){
+            ans=(M[i][0]>ans)?M[i][0]:ans;
         }
-        int max = Integer.MIN_VALUE;
-        for(int i = 0; i < n; i++){
-            max = Math.max(max, dp[i][0]);
-        }
-        return max;
+        return ans;
     }
-
 }
