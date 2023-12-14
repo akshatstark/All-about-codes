@@ -1,0 +1,34 @@
+// make a demo of fences to understand the problem -> https://www.youtube.com/watch?v=ju8vrEAsa3Q
+class Solution
+{
+    long countWays(int n,int k)
+    {
+        if(n==1) return k;
+       
+        long same=k, diff=k*(k-1), tot=same+diff;   // storing value till 2nd fence
+        
+        if(n==2) return tot;
+        
+        for(int i=3;i<=n;i++){
+            same=diff;
+            diff=(tot*(k-1))%1000000007;
+            tot=(same+diff)%1000000007;
+        }
+        return tot;
+    }
+}
+// very few cases were not running so here is another sol.
+// class Solution
+// {
+//     long countWays(int n,int k)
+//     {
+//         long ans=1;
+//         long prev=1;
+//         for(int i=1;i<n;i++){
+//              long temp=(k-1)*ans;
+//              ans=(prev+temp)%1000000007;
+//              prev=temp;
+//         }
+//         return (ans*k)%1000000007;
+//     }
+// }
