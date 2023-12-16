@@ -1,0 +1,16 @@
+// we have 6 cases here and will solve them using combinations->
+// 1. all a-> 1
+// 2. 1b all a-> nC1= n
+// 3. 1c all a-> n
+// 4. 1b 1c all a-> nC1*n-1C1= n(n-1)
+// 5. 2c all a-> nC2= n(n-1)/2
+// 6. 1b 2c all a-> nC1*n-1C2= n(n-1(n-2))/2
+// consider all a positions as 1 and if multiply by 1 it doesnt affect
+
+class Solution 
+{ 
+    static long countStr(long n)
+	{
+	    return (1) + (n) + (n) + (n*(n-1)) + (n*(n-1))/2 + (n*(n-1)*(n-2))/2;
+	}
+} 
