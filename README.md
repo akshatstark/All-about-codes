@@ -1,2 +1,3 @@
-# Problemsolving-hackerrank
+# DSA->
+DS Wise questions of Gfg and Coding Ninjas
 Contains all the solution of Problem Solving Algorithms of HackerRank in Java...
