@@ -1,0 +1,21 @@
+class Solution {
+    public pair[] allPairs( long A[], long B[], long N, long M, long X) {
+        Arrays.sort(A);
+        ArrayList<pair> al= new ArrayList<>();
+        HashSet<Long>hs=new HashSet<>();
+        for(long i:B){
+            hs.add(i);
+        }
+        
+        for(long i:A){
+            long val=X-i;
+            
+            if(hs.contains(val)){
+                al.add(new pair(i,val));
+            }
+        }
+        pair[] ans=new pair[al.size()];
+        al.toArray(ans);
+        return ans;
+    }
+}
