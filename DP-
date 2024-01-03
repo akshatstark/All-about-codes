@@ -1,0 +1,63 @@
+// Recursion ->
+public class Solution {
+	static int solve(int i ,int j1,int j2,int r,int c,int[][] grid){
+		if(j1<0 || j1>=c || j2<0 || j2>=c) return (int) (Math.pow(-10, 9));
+
+		if(i==r-1){
+			if(j1==j2) return grid[i][j1];
+			else return grid[i][j1] + grid[i][j2];
+		}
+
+		int maxi=Integer.MIN_VALUE;
+		for(int ac=-1;ac<=1;ac++){
+			for(int bb=-1;bb<=1;bb++){
+				int value;
+				if(j1==j2) value=grid[i][j1]+ solve(i+1,j1+ac,j2+bb,r,c,grid);
+				else value= grid[i][j1]+grid[i][j2] + solve(i+1,j1+ac,j2+bb,r,c,grid);
+
+				maxi=Math.max(maxi,value);
+			}
+		}
+		return maxi;
+	}  
+	public static int maximumChocolates(int r, int c, int[][] grid) {
+		
+		return solve(0,0,c-1,r,c,grid);
+	}
+}
+
+// Memoization->
+public class Solution {
+	static int solve(int i ,int j1,int j2,int r,int c,int[][] grid,int[][][] dp){
+		if(j1<0 || j1>=c || j2<0 || j2>=c) return (int) (Math.pow(-10, 9));
+
+		if(i==r-1){
+			if(j1==j2) return grid[i][j1];
+			else return grid[i][j1] + grid[i][j2];
+		}
+
+		if(dp[i][j1][j2]!=-1) return dp[i][j1][j2];
+
+		int maxi=Integer.MIN_VALUE;
+		for(int ac=-1;ac<=1;ac++){
+			for(int bb=-1;bb<=1;bb++){
+				int value;
+				if(j1==j2) value=grid[i][j1]+ solve(i+1,j1+ac,j2+bb,r,c,grid,dp);
+				else value= grid[i][j1]+grid[i][j2] + solve(i+1,j1+ac,j2+bb,r,c,grid,dp);
+
+				maxi=Math.max(maxi,value);
+			}
+		}
+		return dp[i][j1][j2]=maxi;
+	}  
+	public static int maximumChocolates(int r, int c, int[][] grid) {
+		int[][][] dp=new int[r][c][c];
+		for(int row1[][]: dp){
+			for(int row2[]: row1){
+				Arrays.fill(row2, -1);
+			}
+		}
+		return solve(0,0,c-1,r,c,grid,dp);
+	}
+}
+
