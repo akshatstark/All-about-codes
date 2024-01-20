@@ -1,0 +1,111 @@
+//Post-order(left->ryt->root)
+import java.util.*;
+public class Main
+{
+    static class Node{
+        int key;
+        Node left,right;
+        
+        public Node(int item){
+            key=item;
+            left=right=null;
+        }
+    }
+    static class BinaryTree{
+        Node root;
+        BinaryTree() { root=null;}
+    }
+    static void solve(Node curr){
+        if(curr==null){
+            return;
+        }
+       
+        solve(curr.left);
+        solve(curr.right);
+        System.out.print(curr.key+" ");
+        
+    }
+	public static void main(String[] args) {
+	    BinaryTree bt=new BinaryTree();
+	    bt.root=new Node(1);
+	    bt.root.left=new Node(2);
+	    bt.root.right=new Node(3);
+	    bt.root.left.left=new Node(4);
+	    bt.root.left.right=new Node(5);
+		solve(bt.root);
+	}
+}
+
+//Pre-order(root->left->ryt)
+import java.util.*;
+public class Main
+{
+    static class Node{
+        int key;
+        Node left,right;
+        
+        public Node(int item){
+            key=item;
+            left=right=null;
+        }
+    }
+    static class BinaryTree{
+        Node root;
+        BinaryTree() { root=null;}
+    }
+    static void solve(Node curr){
+        if(curr==null){
+            return;
+        }
+        System.out.print(curr.key+" ");
+        solve(curr.left);
+        solve(curr.right);
+        
+    }
+	public static void main(String[] args) {
+	    BinaryTree bt=new BinaryTree();
+	    bt.root=new Node(1);
+	    bt.root.left=new Node(2);
+	    bt.root.right=new Node(3);
+	    bt.root.left.left=new Node(4);
+	    bt.root.left.right=new Node(5);
+		solve(bt.root);
+	}
+}
+
+//Inorder(left->root->ryt)
+import java.util.*;
+public class Main
+{
+    static class Node{
+        int key;
+        Node left,right;
+        
+        public Node(int item){
+            key=item;
+            left=right=null;
+        }
+    }
+    static class BinaryTree{
+        Node root;
+        BinaryTree() { root=null;}
+    }
+    static void solve(Node curr){
+        if(curr==null){
+            return;
+        }
+        solve(curr.left);
+        System.out.print(curr.key+" ");
+        solve(curr.right);
+        
+    }
+	public static void main(String[] args) {
+	    BinaryTree bt=new BinaryTree();
+	    bt.root=new Node(1);
+	    bt.root.left=new Node(2);
+	    bt.root.right=new Node(3);
+	    bt.root.left.left=new Node(4);
+	    bt.root.left.right=new Node(5);
+		solve(bt.root);
+	}
+}
