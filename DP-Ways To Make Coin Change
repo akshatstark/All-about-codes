@@ -1,0 +1,71 @@
+//Recursion-
+public class Solution {
+	static int solve(int[] arr, int n,int tar){
+		if(tar==0) return 1;
+
+		if(n==0){
+			if(tar%arr[n]==0) return 1;
+			else return 0;
+		}
+
+		int ntpk=solve(arr,n-1,tar);
+		int pk=0;
+		if(arr[n]<=tar) pk=solve(arr,n,tar-arr[n]);
+
+		return ntpk+pk;
+	}
+
+	public static long countWaysToMakeChange(int denominations[], int value){	
+		int n=denominations.length;		
+		return solve(denominations,n-1,value);
+	}	
+}
+
+//Memoization-
+public class Solution {
+	static long solve(int[] arr, int n,int tar,long[][] dp){
+		if(n==0){
+			if(tar%arr[0]==0) return 1;
+			else return 0;
+		}
+
+		if(dp[n][tar]!=-1) return dp[n][tar];
+
+		long ntpk=solve(arr,n-1,tar,dp);
+		long pk=0;
+		if(arr[n]<=tar) pk=solve(arr,n,tar-arr[n],dp);
+
+		return dp[n][tar]=ntpk+pk;
+	}
+
+	public static long countWaysToMakeChange(int denominations[], int value){	
+		int n=denominations.length;
+		long[][] dp=new long[n][value+1];
+		for(long[] row:dp) Arrays.fill(row,-1);
+
+		return solve(denominations,n-1,value,dp);
+	}	
+}
+
+//Tabulation-
+public class Solution {
+	public static long countWaysToMakeChange(int denominations[], int value){	
+		int n=denominations.length;
+		long[][] dp=new long[n][value+1];
+		
+		for(int i=0;i<=value;i++){
+			dp[0][i]= value%denominations[0]==0?1:0;
+		}
+
+		for(int i=1;i<n;i++){
+			for(int j=0;j<=value;j++){
+				long ntpk=dp[i-1][j];
+				long pk=0;
+				if(denominations[i]<=j) pk=dp[i][j-denominations[i]];
+
+				dp[i][j]=ntpk+pk;
+			}
+		}
+		return dp[n-1][value];
+	}	
+}
