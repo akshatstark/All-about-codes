@@ -1,0 +1,62 @@
+//Recursion-
+public class Solution {
+    static int solve(int n,int w,int[] val,int[] wt){   
+        if(n==0){
+            return (w/wt[0])*val[0];   // he will steal till the no. of times he can steal
+        }
+
+        int ntpk=solve(n-1,w,val,wt);
+        int pk=Integer.MIN_VALUE;
+        if(w>=wt[n]) pk=val[n]+solve(n,w-wt[n],val,wt);
+        return Math.max(pk,ntpk);
+
+    }
+    public static int unboundedKnapsack(int n, int w, int[] profit, int[] weight) {
+        return solve(n-1,w,profit,weight);
+    }
+}
+
+//Memoization-
+public class Solution {
+    static int solve(int n,int w,int[] val,int[] wt,int[][] dp){   
+        if(n==0){
+            return (w/wt[0])*val[0];   // he will steal till the no. of times he can steal
+        }
+
+        if(dp[n][w]!=-1) return dp[n][w];
+
+        int ntpk=solve(n-1,w,val,wt,dp);
+        int pk=Integer.MIN_VALUE;
+        if(w>=wt[n]) pk=val[n]+solve(n,w-wt[n],val,wt,dp);
+        return dp[n][w]=Math.max(pk,ntpk);
+
+    }
+    public static int unboundedKnapsack(int n, int w, int[] profit, int[] weight) {
+        int[][] dp=new int[n][w+1];
+        for(int[] row:dp) Arrays.fill(row,-1);
+
+        return solve(n-1,w,profit,weight,dp);
+    }
+}
+
+//Tabulation-
+public class Solution {
+    public static int unboundedKnapsack(int n, int w, int[] profit, int[] weight) {
+        int[][] dp=new int[n][w+1];
+
+        for(int i=0;i<=w;i++){
+            dp[0][i]=(i/weight[0])*profit[0];
+        }
+
+        for(int i=1;i<n;i++){
+            for(int j=0;j<=w;j++){
+                int ntpk=dp[i-1][j];
+                int pk=Integer.MIN_VALUE;
+                if(j>=weight[i]) pk=profit[i]+dp[i][j-weight[i]];
+
+                dp[i][j]=Math.max(ntpk,pk);
+            }
+        }
+        return dp[n-1][w];
+    }
+}
