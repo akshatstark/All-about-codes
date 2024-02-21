@@ -1,0 +1,68 @@
+//Recursion
+public class Solution {
+    static int solve(String str1,String str2,int i,int j){
+        if(j<0) return 1;  // str2 is exhausted i.e all matched
+        if(i<0) return 0;  // str1 is exhausted i.e there is still matching left
+
+        if(str1.charAt(i)==str2.charAt(j)){
+            return (solve(str1, str2, i-1, j)+solve(str1, str2, i-1, j-1));
+        }
+         return solve(str1, str2, i-1, j);        
+    }
+    public static int distinctSubsequences(String str, String sub) {
+        int n=str.length();
+        int m=sub.length();
+        return solve(str,sub,n-1,m-1);
+    }
+}
+
+//Memoization-
+
+public class Solution {
+    static int solve(String str1,String str2,int i,int j,int[][] dp){
+        if(j<0) return 1;  // str2 is exhausted i.e all matched
+        if(i<0) return 0;  // str1 is exhausted i.e there is still matching left
+
+        if(dp[i][j]!=-1) return dp[i][j];
+
+        if(str1.charAt(i)==str2.charAt(j)){
+            return dp[i][j]=(solve(str1, str2, i-1, j,dp)+solve(str1, str2, i-1, j-1,dp))% 1000000007;
+        }
+
+        return dp[i][j]= solve(str1, str2, i-1, j,dp)% 1000000007;
+        
+    }
+    public static int distinctSubsequences(String str, String sub) {
+        int n=str.length();
+        int m=sub.length();
+
+        int[][] dp=new int[n][m];
+        for(int[] row:dp) Arrays.fill(row,-1);
+
+        return solve(str,sub,n-1,m-1,dp);
+    }
+}
+
+//Tabulation-
+public class Solution {
+    public static int distinctSubsequences(String str, String sub) {
+        int n=str.length();
+        int m=sub.length();
+
+        int[][] dp=new int[n+1][m+1];   
+
+        for(int i=0;i<n;i++) dp[i][0]=1;
+
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+                if(str.charAt(i-1)==sub.charAt(j-1)){
+                    dp[i][j]=(dp[i-1][j]+dp[i-1][j-1])% 1000000007;
+                }
+                else{
+                    dp[i][j]= dp[i-1][j]% 1000000007;
+                }
+            }
+        }
+        return dp[n][m]% 1000000007;
+    }
+}
