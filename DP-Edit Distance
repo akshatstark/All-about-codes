@@ -1,0 +1,62 @@
+//Recursion-
+public class Solution {
+    static int solve(int i,int j, String str1,String str2){
+        if(i<0) return j+1;
+        if(j<0) return i+1;
+
+        if(str1.charAt(i)==str2.charAt(j)) return solve(i-1, j-1, str1, str2);
+        
+        return 1+Math.min(solve(i-1, j, str1, str2),Math.min(solve(i, j-1, str1, str2),solve(i-1, j-1, str1, str2)));
+    }
+    public static int editDistance(String str1, String str2) {
+        int n=str1.length();
+        int m=str2.length();
+
+        return solve(n-1,m-1,str1,str2);
+    }
+}
+
+//Memoization-
+
+public class Solution {
+    static int solve(int i,int j, String str1,String str2,int[][] dp){
+        if(i<0) return j+1;
+        if(j<0) return i+1;
+
+        if(dp[i][j]!=-1) return dp[i][j];
+
+        if(str1.charAt(i)==str2.charAt(j)) return dp[i][j]=solve(i-1, j-1, str1, str2,dp);
+        
+        return dp[i][j]=1+Math.min(solve(i-1, j, str1, str2,dp),Math.min(solve(i, j-1, str1, str2,dp),solve(i-1, j-1, str1, str2,dp)));
+    }
+    public static int editDistance(String str1, String str2) {
+        int n=str1.length();
+        int m=str2.length();
+
+        int[][] dp=new int[n][m];
+        for(int[] row:dp) Arrays.fill(row, -1);
+
+        return solve(n-1,m-1,str1,str2,dp);
+    }
+}
+
+//Tabulation-
+public class Solution {
+    public static int editDistance(String str1, String str2) {
+        int n=str1.length();
+        int m=str2.length();
+
+        int[][] dp=new int[n+1][m+1];
+        for(int i=0;i<=n;i++) dp[i][0]=i;
+        for(int i=0;i<=m;i++) dp[0][i]=i;
+
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+                 if(str1.charAt(i-1)==str2.charAt(j-1)) dp[i][j]=dp[i-1][j-1];
+
+                 else dp[i][j]=1+Math.min(dp[i-1][j],Math.min(dp[i][j-1],dp[i-1][j-1]));
+            }
+        }
+        return dp[n][m];
+    }
+}
