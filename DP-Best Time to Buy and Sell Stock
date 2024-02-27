@@ -1,0 +1,13 @@
+// here we can buy and sell only once and tht too in order so this is a simple solution...
+public class Solution{
+    public static int maximumProfit(ArrayList<Integer> prices){
+        int mini=prices.get(0);
+        int res=0;
+        for(int i=1;i<prices.size();i++){
+            int cost=prices.get(i)-mini;
+            res=Math.max(res,cost);
+            mini=Math.min(mini,prices.get(i));
+        }
+        return res;
+    }
+}
