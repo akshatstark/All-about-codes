@@ -43,4 +43,25 @@ public class Solution {
     }
 }
 
-//Tabulation-
+//Tabulation-(Bottom-Up)
+public class Solution {
+    public static long getMaximumProfit(int n, long[] values) {
+        long[][] dp = new long[n+1][2];
+        
+        dp[n][0]=dp[n][1]=0;
+        long pft = 0;
+
+        for(int idx=n-1;idx>=0;idx--){
+            for(int buy=0;buy<=1;buy++){
+                if (buy == 1) {
+                  pft = Math.max(-values[idx] + dp[idx+1][0], 0 + dp[idx+1][1]);
+                } 
+                else {
+                  pft = Math.max(values[idx] + dp[idx+1][1], 0 + dp[idx+1][0]);
+                }
+                dp[idx][buy]=pft;
+            }
+        }
+        return dp[0][1];
+    }
+}
