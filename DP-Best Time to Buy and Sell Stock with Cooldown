@@ -1,0 +1,64 @@
+this is similar to dp on stocks 2 just change the days to +2 after selling
+//Recursion- 
+public class Solution {
+    static int solve(int idx,int buy,int[] values,int n){
+        if(idx>=n) return 0;
+
+        int pft=0;
+
+        if(buy==1){
+            pft=Math.max(-values[idx]+solve(idx+1, 0, values, n), 0+solve(idx+1, 1, values, n));
+            }
+        else{
+             pft=Math.max(values[idx]+solve(idx+2, 1, values, n), 0+solve(idx+1, 0, values, n));
+            }
+        return pft;
+    }
+    public static int stockProfit(int[] prices) {
+        return solve(0,1,prices,prices.length);
+    }
+}
+
+//Memoization-
+public class Solution {
+    static int solve(int idx,int buy,int[] values,int n,int[][] dp){
+        if(idx>=n) return 0;
+
+        if(dp[idx][buy]!=-1) return dp[idx][buy];
+
+        if(buy==1){
+            return dp[idx][buy]=Math.max(-values[idx]+solve(idx+1, 0, values, n,dp), 0+solve(idx+1, 1, values, n,dp));
+            }
+        else{
+            return dp[idx][buy]=Math.max(values[idx]+solve(idx+2, 1, values, n,dp), 0+solve(idx+1, 0, values, n,dp));
+            }
+    }
+    public static int stockProfit(int[] prices) {
+        int n=prices.length;
+        int[][] dp=new int[n][2];
+        for(int[] row:dp) Arrays.fill(row,-1);
+
+        return solve(0,1,prices,n,dp);
+    }
+}
+
+//Tabulation-
+public class Solution {
+    public static int stockProfit(int[] values) {
+        int n=values.length;
+        int[][] dp=new int[n+2][2];     //(as the idx will move 2 points ahead make it n+2)
+        for(int[] row:dp) Arrays.fill(row,0);
+
+        for(int idx=n-1;idx>=0;idx--){
+            for(int buy=0;buy<=1;buy++){
+                    if(buy==1){
+                         dp[idx][buy]=Math.max(-values[idx]+dp[idx+1][0], 0+dp[idx+1][1]);
+                    }
+                    else{
+                        dp[idx][buy]=Math.max(values[idx]+dp[idx+2][1], 0+dp[idx+1][0]);
+                    }
+            }
+        }
+        return dp[0][1];
+    }
+}
