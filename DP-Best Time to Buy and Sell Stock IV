@@ -1,0 +1,25 @@
+just to dp on stocks 3 problem only the limit of transcation is changed...
+public class Solution{
+    public static int maximumProfit(int[] arr, int n, int k){
+        int[][][] dp=new int[n+1][2][k+1];
+        for (int i = 0; i < dp.length; i++) {
+            for (int j = 0; j < dp[i].length; j++) {
+                Arrays.fill(dp[i][j], 0); 
+            }
+        }
+
+        for(int idx=n-1;idx>=0;idx--){
+            for(int buy=0;buy<=1;buy++){
+                for(int lmt=1;lmt<=k;lmt++){
+                     if(buy==0) {
+                        dp[idx][buy][lmt]=Math.max(-arr[idx]+dp[idx+1][1][lmt],0+dp[idx+1][0][lmt]);
+                        }
+                     if (buy == 1){
+                        dp[idx][buy][lmt]=Math.max(arr[idx]+dp[idx+1][0][lmt-1],0+dp[idx+1][1][lmt]);
+                        }
+                }
+            }
+        }
+       return dp[0][0][k];
+    }
+}
