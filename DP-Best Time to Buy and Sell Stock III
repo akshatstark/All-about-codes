@@ -1,0 +1,77 @@
+//Recursion-
+public class Solution {
+    static int solve(int[] arr,int n,int idx,int buy,int lmt){
+        if(idx==n) return 0;
+
+        if(lmt==2) return 0;
+
+        int pft=0;
+        if(buy==0) {
+            pft=Math.max(-arr[idx]+solve(arr, n, idx+1, 1, lmt),0+solve(arr, n, idx+1, 0, lmt));
+        }
+        else{
+            pft=Math.max(arr[idx]+solve(arr, n, idx+1, 0, lmt+1),0+solve(arr, n, idx+1, 1, lmt));
+        }
+        return pft;
+    }
+    public static int maxProfit(int[] prices) {
+        int lmt=0;
+       return solve(prices,prices.length,0,0,lmt);
+    }
+}
+
+//Memoization-
+public class Solution {
+    static int solve(int[] arr,int n,int idx,int buy,int lmt,int[][][] dp){
+        if(idx==n) return 0;
+
+        if(lmt==2) return 0;
+
+        if(dp[idx][buy][lmt]!=-1) return dp[idx][buy][lmt];
+
+        if(buy==0) {
+            return dp[idx][buy][lmt]=Math.max(-arr[idx]+solve(arr, n, idx+1, 1, lmt,dp),0+solve(arr, n, idx+1, 0, lmt,dp));
+        }
+        else{
+            return dp[idx][buy][lmt]=Math.max(arr[idx]+solve(arr, n, idx+1, 0, lmt+1,dp),0+solve(arr, n, idx+1, 1, lmt,dp));
+        }
+    }
+    public static int maxProfit(int[] prices) {
+        int lmt=0;
+        int n=prices.length;
+        int[][][] dp=new int[n][2][3];
+        for (int i = 0; i < dp.length; i++) {
+            for (int j = 0; j < dp[i].length; j++) {
+                Arrays.fill(dp[i][j], -1); 
+            }
+        }
+       return solve(prices,prices.length,0,0,lmt,dp);
+    }
+}
+
+//Tabulation-(bottom up...as we start frm 0)
+public class Solution {
+    public static int maxProfit(int[] arr) {
+        int n=arr.length;
+        int[][][] dp=new int[n+1][2][3];
+        for (int i = 0; i < dp.length; i++) {
+            for (int j = 0; j < dp[i].length; j++) {
+                Arrays.fill(dp[i][j], 0); 
+            }
+        }
+
+        for(int idx=n-1;idx>=0;idx--){
+            for(int buy=0;buy<=1;buy++){
+                for(int lmt=1;lmt<=2;lmt++){
+                     if(buy==0) {
+                        dp[idx][buy][lmt]=Math.max(-arr[idx]+dp[idx+1][1][lmt],0+dp[idx+1][0][lmt]);
+                        }
+                     if (buy == 1){
+                        dp[idx][buy][lmt]=Math.max(arr[idx]+dp[idx+1][0][lmt-1],0+dp[idx+1][1][lmt]);
+                        }
+                }
+            }
+        }
+       return dp[0][0][2];
+    }
+}
