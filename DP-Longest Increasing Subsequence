@@ -1,0 +1,65 @@
+//Recursion-
+public class Solution {
+	static int solve(int[] arr,int idx,int prev){
+		if(idx<0) return 0;
+
+		int len=0+solve(arr,idx-1,prev);
+		if(prev==-1|| arr[prev]>arr[idx] ){
+				len=Math.max(len,1+solve(arr, idx-1, idx));
+		}
+		return len;
+	}
+	public static int longestIncreasingSubsequence(int arr[]) {
+		int n=arr.length;
+		return solve(arr,n-1,-1);
+	}
+}
+
+//Memoization-
+import java.util.*;
+public class Solution {
+	static int solve(int[] arr,int idx,int prev,int[][] dp){
+		if(idx<0) return 0;
+
+		if(dp[idx][prev+1] !=-1) return dp[idx][prev+1];
+
+		int len=0+solve(arr,idx-1,prev,dp);
+		if(prev==-1|| arr[prev]>arr[idx] ){
+				len=Math.max(len,1+solve(arr, idx-1, idx,dp));
+		}
+		return dp[idx][prev+1]=len;
+	}
+	public static int longestIncreasingSubsequence(int arr[]) {
+		int n=arr.length;
+		int[][] dp=new int[n][n+1];
+		for(int[] row:dp) Arrays.fill(row,-1);
+
+		return solve(arr,n-1,-1,dp);
+	}
+}
+
+//Tabulation-
+public class Solution {
+	public static int longestIncreasingSubsequence(int arr[]) {
+		int n=arr.length;
+		int dp[][]=new int[n+1][n+1];
+    
+    for(int ind = n-1; ind>=0; ind --){
+        for (int prev_index = ind-1; prev_index >=-1; prev_index --){
+            
+            int notTake = 0 + dp[ind+1][prev_index +1];
+    
+            int take = 0;
+    
+            if(prev_index == -1 || arr[ind] > arr[prev_index]){
+                
+                take = 1 + dp[ind+1][ind+1];
+            }
+    
+            dp[ind][prev_index+1] = Math.max(notTake,take);
+            
+        }
+    }
+    return dp[0][0];
+	}
+}
