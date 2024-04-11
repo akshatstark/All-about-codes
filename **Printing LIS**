@@ -1,0 +1,50 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class LIS {
+
+    public static List<Integer> longestIncreasingSubsequence(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return new ArrayList<>();
+
+        int n = nums.length;
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1);
+        int maxLen = 1;
+
+        // Calculate longest increasing subsequence length ending at each index
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                    maxLen = Math.max(maxLen, dp[i]);
+                }
+            }
+        }
+
+        // Backtrack to get the actual LIS
+        List<Integer> lis = new ArrayList<>();
+        int endIndex = 0;
+        for (int i = 1; i < n; i++) {
+            if (dp[i] > dp[endIndex])
+                endIndex = i;
+        }
+        lis.add(nums[endIndex]);
+        int prevLen = dp[endIndex] - 1;
+        for (int i = endIndex - 1; i >= 0; i--) {
+            if (dp[i] == prevLen && nums[i] < nums[endIndex]) {
+                lis.add(nums[i]);
+                endIndex = i;
+                prevLen--;
+            }
+        }
+        return lis;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {10, 22, 9, 33, 21, 50, 41, 60, 80};
+        List<Integer> lis = longestIncreasingSubsequence(nums);
+        System.out.println("Longest Increasing Subsequence: " + lis);
+    }
+}
