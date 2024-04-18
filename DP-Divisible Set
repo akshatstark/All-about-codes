@@ -1,0 +1,44 @@
+public class Solution {
+    public static List< Integer > divisibleSet(int []arr) {
+
+       Arrays.sort(arr);
+
+       int n= arr.length;
+// intialiszing the 2 req lists...
+       List<Integer> dp=new ArrayList<>(Collections.nCopies(n, 1));
+       List<Integer> hash=new ArrayList<>(Collections.nCopies(n, 0));
+// updating the values of dp(len of lis) and hash(real idx of arr)...
+        for(int i=0;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(arr[i]%arr[j]==0 && dp.get(i)<1+dp.get(j)){
+                    dp.set(i, 1+dp.get(j));
+                    hash.set(i, j);
+                }                
+            }
+        }
+// finding the largest no. and idx so that we can backtrack and find substring frm tht point...
+    int ans = Integer.MIN_VALUE;
+    int lastIndex = -1;
+
+    for (int i = 0; i < n; i++) {
+            if (dp.get(i) > ans) {
+                ans = dp.get(i);
+                lastIndex = i;
+            }
+        }
+
+    List<Integer> temp = new ArrayList<>();
+    temp.add(arr[lastIndex]);
+
+    while (hash.get(lastIndex) != lastIndex) {
+            lastIndex = hash.get(lastIndex);
+            temp.add(arr[lastIndex]);
+        }
+
+        // Reverse the array
+        Collections.reverse(temp);
+
+        return temp;
+
+    }
+}
