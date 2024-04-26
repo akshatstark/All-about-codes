@@ -1,0 +1,30 @@
+//similar to LIS jzt create a count array and store the freq. of given len at particular idx...
+public class Solution {
+    public static int findNumberOfLIS(int []arr) {
+        int n=arr.length;
+        int[] dp1=new int[n];
+        int[] ct=new int[n];
+        Arrays.fill(dp1,1);
+        Arrays.fill(ct,1);
+
+        int maxi=1;
+
+        for(int i=0;i<n;i++){
+            for(int prev=0;prev<i;prev++){
+                if(dp1[i]<dp1[prev]+1 && arr[prev]<arr[i]){
+                    dp1[i]=dp1[prev]+1;
+                    ct[i]=ct[prev];
+                }
+                else if(dp1[i]==dp1[prev]+1 && arr[prev]<arr[i]){
+                    ct[i]+=ct[prev];
+                }
+            }
+             maxi=Math.max(maxi,dp1[i]);
+        }
+        int res=0;
+        for(int i=0;i<n;i++){
+            if(dp1[i]==maxi) res+=ct[i];
+        }
+        return res;
+    }
+}
