@@ -1,0 +1,49 @@
+public class Solution {
+    // Method to find the largest rectangle area in a histogram
+    static int largestRectangleArea(int[] heights) {
+        int n = heights.length;
+        Stack<Integer> stack = new Stack<>();
+        int maxArea = 0;
+        int i = 0;
+
+        while (i < n) {
+            // If stack is empty or the current bar is higher than the bar at stack top, push it to the stack
+            if (stack.isEmpty() || heights[i] >= heights[stack.peek()]) {
+                stack.push(i++);
+            } else {
+                // Pop the top element from the stack
+                int top = stack.pop();
+                // Calculate the area with heights[top] as the smallest (or minimum height) bar 'h'
+                int area = heights[top] * (stack.isEmpty() ? i : i - stack.peek() - 1);
+                // Update maxArea, if needed
+                maxArea = Math.max(maxArea, area);
+            }
+        }
+
+        // Now, pop the remaining bars from the stack and calculate area
+        while (!stack.isEmpty()) {
+            int top = stack.pop();
+            int area = heights[top] * (stack.isEmpty() ? i : i - stack.peek() - 1);
+            maxArea = Math.max(maxArea, area);
+        }
+
+        return maxArea;
+    }
+
+    // Method to find the maximal area of a sub-matrix of all 1's
+    public static int maximalAreaOfSubMatrixOfAll1(int[][] mat, int n, int m) {
+        if (mat.length == 0) return 0;
+        int maxArea = 0;
+        int[] height = new int[m];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                height[j] = mat[i][j] == 1 ? height[j] + 1 : 0;
+            }
+            int area = largestRectangleArea(height);
+            maxArea = Math.max(maxArea, area);
+        }
+
+        return maxArea;
+    }
+}
