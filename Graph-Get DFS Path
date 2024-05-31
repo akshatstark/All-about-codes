@@ -1,0 +1,65 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+    static ArrayList<Integer> getPath(int V, int E, ArrayList<Integer> a, ArrayList<Integer> b, int v1, int v2) {
+        // Create the adjacency list representation of the graph
+      ArrayList<ArrayList<Integer>> adjList=new ArrayList<>(V);
+      for(int i=0;i<V;i++){
+          adjList.add(new ArrayList<>());
+      }
+        
+        // Fill the adjacency list with edges
+       for(int i=0;i<E;i++){
+           adjList.get(a.get(i)).add(b.get(i));     // adds ele at ith idx at b to list at vertex at ith os of a
+           adjList.get(b.get(i)).add(a.get(i));
+       }
+
+        // To store the path
+        ArrayList<Integer> path = new ArrayList<>();
+        
+        // To keep track of visited nodes
+        boolean[] visited = new boolean[V];
+        
+        // Helper function to perform DFS
+        boolean found = dfs(v1, v2, adjList, visited, path);
+        
+        // If no path found, return an empty list
+        if (!found) {
+            return new ArrayList<>();
+        }
+        
+        // Reverse the path before returning
+        Collections.reverse(path);
+        return path;
+    }
+    
+    private static boolean dfs(int current, int destination, ArrayList<ArrayList<Integer>> adjList, boolean[] visited, ArrayList<Integer> path) {
+        // Mark the current node as visited
+        visited[current] = true;
+        
+        // Add the current node to the path
+        path.add(current);
+        
+        // If we have reached the destination, return true
+        if (current == destination) {
+            return true;
+        }
+        
+        // Explore the neighbors
+        for (int neighbor : adjList.get(current)) {
+            if (!visited[neighbor]) {
+                boolean found = dfs(neighbor, destination, adjList, visited, path);
+                if (found) {
+                    return true;
+                }
+            }
+        }
+        
+        // If not found, backtrack by removing the current node from the path
+        path.remove(path.size() - 1);
+        return false;
+    }
+
+}
